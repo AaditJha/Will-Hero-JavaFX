@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-11-22T19:02:29.696Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36" etag="ZmQ4orzNJ-u4TUPiW2qc" version="15.8.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-11-22T19:02:56.542Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36" etag="BYznorT-lWHmHDUuCwsu" version="15.8.3" type="github">
   <diagram id="gX0NP72L9NF0O32XfgGe" name="Page-1">
     <mxGraphModel dx="5430" dy="1028" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="4681" math="0" shadow="0">
       <root>
@@ -706,9 +706,6 @@
               <mxPoint x="1170" y="673" />
             </Array>
           </mxGeometry>
-        </mxCell>
-        <mxCell id="LWtzihFS2XLVeP94KqWB-2" value="&lt;u&gt;&lt;span style=&quot;font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;u&gt;- COST_OF_RESURRECTION: static final int&lt;/u&gt;&lt;/div&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;u&gt;- LEVEL_END_LIMIT: static final int&lt;/u&gt;&lt;/div&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;u&gt;- LEVEL_DEPTH_LIMIT: static final int&lt;/u&gt;&lt;/div&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;u&gt;- GRAVITY: static final int&lt;/u&gt;&lt;/div&gt;&lt;/span&gt;&lt;/u&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="1080" y="420" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
