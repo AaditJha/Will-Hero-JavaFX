@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-11-22T18:27:25.419Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36" etag="fAPniLAmFAczU4qpryuu" version="15.8.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-11-22T19:02:29.696Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36" etag="ZmQ4orzNJ-u4TUPiW2qc" version="15.8.3" type="github">
   <diagram id="gX0NP72L9NF0O32XfgGe" name="Page-1">
     <mxGraphModel dx="5430" dy="1028" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="4681" math="0" shadow="0">
       <root>
@@ -22,8 +22,11 @@
         <mxCell id="vOEEPBtdWCrj8-D4H_Gn-2" value="Game" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="1270" y="440" width="280" height="330" as="geometry" />
         </mxCell>
-        <mxCell id="vOEEPBtdWCrj8-D4H_Gn-3" value="- currentPlayer: Player&#xa;- totalCoinsCollected: int&#xa;- obstacleList: ArrayList&lt;ObstacleWindMill&gt;&#xa;- platformList: ArrayList&lt;Platform&gt;&#xa;- orcsList: ArrayList&lt;Orcs&gt;&#xa;- coinList: ArrayList&lt;Coin&gt;&#xa;- weapons: final ArrayList&lt;Weapon&gt;&#xa;- helmets: final ArrayList&lt;Helmet&gt;&#xa;- COST_OF_RESURRECTION: static final int&#xa;- LEVEL_END_LIMIT: static final int&#xa;- LEVEL_DEPTH_LIMIT: static final int&#xa;- GRAVITY: static final int&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="vOEEPBtdWCrj8-D4H_Gn-2" vertex="1">
-          <mxGeometry y="26" width="280" height="194" as="geometry" />
+        <mxCell id="vOEEPBtdWCrj8-D4H_Gn-3" value="- currentPlayer: Player&#xa;- totalCoinsCollected: int&#xa;- obstacleList: ArrayList&lt;ObstacleWindMill&gt;&#xa;- platformList: ArrayList&lt;Platform&gt;&#xa;- orcsList: ArrayList&lt;Orcs&gt;&#xa;- coinList: ArrayList&lt;Coin&gt;&#xa;- weapons: final ArrayList&lt;Weapon&gt;&#xa;- helmets: final ArrayList&lt;Helmet&gt;&#xa;- chests: final ArrayList&lt;Chest&gt;&#xa;&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="vOEEPBtdWCrj8-D4H_Gn-2" vertex="1">
+          <mxGeometry y="26" width="280" height="134" as="geometry" />
+        </mxCell>
+        <mxCell id="LWtzihFS2XLVeP94KqWB-3" value="-COST_OF_RESURRECTION: final int&#xa;- LEVEL_END_LIMIT: final int&#xa;- LEVEL_DEPTH_LIMIT: final int&#xa;- GRAVITY: final int&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=4" vertex="1" parent="vOEEPBtdWCrj8-D4H_Gn-2">
+          <mxGeometry y="160" width="280" height="60" as="geometry" />
         </mxCell>
         <mxCell id="vOEEPBtdWCrj8-D4H_Gn-4" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="vOEEPBtdWCrj8-D4H_Gn-2" vertex="1">
           <mxGeometry y="220" width="280" height="12" as="geometry" />
@@ -545,7 +548,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="6ModIIwXUPOdRBtdrD3C-78" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=0.998;exitY=0.594;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="vOEEPBtdWCrj8-D4H_Gn-3" target="hK0s2O0z6G4P-B0Uy8Qg-1" edge="1">
+        <mxCell id="6ModIIwXUPOdRBtdrD3C-78" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=0.997;exitY=0.858;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="vOEEPBtdWCrj8-D4H_Gn-3" target="hK0s2O0z6G4P-B0Uy8Qg-1" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="2146.62" y="372.0160000000001" as="sourcePoint" />
             <mxPoint x="1842.5" y="590" as="targetPoint" />
@@ -703,6 +706,9 @@
               <mxPoint x="1170" y="673" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="LWtzihFS2XLVeP94KqWB-2" value="&lt;u&gt;&lt;span style=&quot;font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;u&gt;- COST_OF_RESURRECTION: static final int&lt;/u&gt;&lt;/div&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;u&gt;- LEVEL_END_LIMIT: static final int&lt;/u&gt;&lt;/div&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;u&gt;- LEVEL_DEPTH_LIMIT: static final int&lt;/u&gt;&lt;/div&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;u&gt;- GRAVITY: static final int&lt;/u&gt;&lt;/div&gt;&lt;/span&gt;&lt;/u&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="420" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
