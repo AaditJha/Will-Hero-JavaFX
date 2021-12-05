@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane prefHeight="640.0" prefWidth="360.0" style="-fx-background-color: #000000;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="application.gui.MainSceneController">
+   <center>
+      <ImageView fx:id="bgSplashScreen" fitHeight="640.0" fitWidth="360.0" pickOnBounds="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../../../Assets/Icons/SplashScreen.jpg" />
+         </image>
+      </ImageView>
+   </center>
+</BorderPane>
