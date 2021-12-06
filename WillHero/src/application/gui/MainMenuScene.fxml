@@ -13,6 +13,7 @@
 
 <AnchorPane fx:id="mainPane" maxHeight="640.0" maxWidth="360.0" minHeight="640.0" minWidth="360.0" onKeyTyped="#startNewGame" prefHeight="640.0" prefWidth="360.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #2980B9, #6DD5FA);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.MainMenuSceneController">
 	<children>
+      <AnchorPane fx:id="cloudsContainerPane" layoutY="155.0" opacity="0.55" prefHeight="359.0" prefWidth="360.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
 		<ImageView fitHeight="640.0" fitWidth="360.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../../../Assets/Icons/mainScreenBG.png" />

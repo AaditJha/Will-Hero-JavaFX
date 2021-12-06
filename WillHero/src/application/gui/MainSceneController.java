@@ -21,15 +21,16 @@ public class MainSceneController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		
+		final boolean debugging = true;
+		
 		SequentialTransition sequentialTransition = new SequentialTransition();
-		
-		FadeTransition fadeIn = getFadeTransition(0.0,1.0,2000);
-		FadeTransition stayOn = getFadeTransition(1.0,1.0,1000);
-		FadeTransition fadeOut = getFadeTransition(1.0,0.0,2000);
-		
+		FadeTransition fadeIn = getFadeTransition(0.0,1.0,(debugging)?100:2000);
+		FadeTransition stayOn = getFadeTransition(1.0,1.0,(debugging)?100:1000);
+		FadeTransition fadeOut = getFadeTransition(1.0,0.0,(debugging)?100:2000);
+
 		sequentialTransition.getChildren().addAll(fadeIn,stayOn,fadeOut);
-		
+
 		sequentialTransition.setOnFinished((e)->{
 			try {
 				showMainMenu();
@@ -37,9 +38,9 @@ public class MainSceneController implements Initializable {
 				e1.printStackTrace();
 			}
 		});
-		
+
 		sequentialTransition.play();
-	}
+}
 
 	private void showMainMenu() throws IOException {
 		
