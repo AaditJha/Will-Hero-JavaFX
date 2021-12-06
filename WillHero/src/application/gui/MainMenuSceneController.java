@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -17,7 +16,7 @@ public class MainMenuSceneController {
 	private final String keyToPlayWith = "\r";
 	
 	@FXML
-	private AnchorPane mainPane, tappableRegion;
+	private AnchorPane mainPane;
 	
 	@FXML
 	private Rectangle bottomBar;
@@ -26,13 +25,13 @@ public class MainMenuSceneController {
 	private Polygon topBar;
 	
 	@FXML
-	private Label coinCountLabel;
+	private Label coinCountLabel, highScoreCount;
 	
 	@FXML
 	private Button settingsButton, loadGameButton, quitGameButton;
 	
 	@FXML
-	private ImageView dummyPlayer, settingsButtonImg, loadGameButtonImg, quitGameButtonImg, handCursorTap;
+	private ImageView dummyPlayer, settingsButtonImg, loadGameButtonImg, quitGameButtonImg;
 	
 	@FXML
 	public void openSettings(MouseEvent event) {

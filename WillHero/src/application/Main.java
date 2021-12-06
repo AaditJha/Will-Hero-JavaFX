@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 
 
 public class Main extends Application {
@@ -16,6 +17,8 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Will Hero");
+			Image icon = new Image("file:Assets/Icons/main_icon.ico");
+			primaryStage.getIcons().addAll(icon);
 			primaryStage.show();
 			
 		} catch(Exception e) {

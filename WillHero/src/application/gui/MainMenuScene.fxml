@@ -13,19 +13,18 @@
 
 <AnchorPane fx:id="mainPane" maxHeight="640.0" maxWidth="360.0" minHeight="640.0" minWidth="360.0" onKeyTyped="#startNewGame" prefHeight="640.0" prefWidth="360.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #2980B9, #6DD5FA);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.MainMenuSceneController">
 	<children>
-		<ImageView fitHeight="640.0" fitWidth="418.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="640.0" fitWidth="360.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../../../Assets/Icons/mainScreenBG.png" />
 			</image>
 		</ImageView>
-		<ImageView fx:id="dummyPlayer" fitHeight="59.0" fitWidth="50.0" layoutX="210.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fx:id="dummyPlayer" fitHeight="59.0" fitWidth="50.0" layoutX="160.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../../../Assets/Sprites/Player.png" />
 			</image>
 		</ImageView>
-		<Rectangle arcHeight="5.0" arcWidth="5.0" height="640.0" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="360.0" />
-		<Rectangle fx:id="bottomBar" arcHeight="5.0" arcWidth="5.0" fill="#092f59" height="97.0" layoutY="546.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="360.0" />
-		<Polygon fx:id="topBar" fill="#092f59" layoutX="196.0" layoutY="204.0" opacity="0.89" points="164.6441650390625, -150.0, 164.6441650390625, -190.0, -124.09070587158203, -190.0, -108.10645294189453, -172.05125427246094, -124.09070587158203, -150.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+		<Rectangle fx:id="bottomBar" arcHeight="5.0" arcWidth="5.0" fill="#105fb3" height="72.0" layoutX="1.0" layoutY="571.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="360.0" />
+		<Polygon fx:id="topBar" fill="#105fb3" layoutX="196.0" layoutY="204.0" opacity="0.89" points="164.6441650390625, -150.0, 164.6441650390625, -190.0, -124.09070587158203, -190.0, -108.10645294189453, -172.05125427246094, -124.09070587158203, -150.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
 		<ImageView fitHeight="30.0" fitWidth="26.0" layoutX="315.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../../../Assets/Sprites/Coin.png" />
@@ -45,34 +44,29 @@
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button fx:id="loadGameButton" layoutX="72.0" layoutY="574.0" mnemonicParsing="false" onMouseClicked="#openLoadGameMenu" prefHeight="40.0" prefWidth="44.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="80.0">
-			<graphic>
-				<ImageView fx:id="loadGameButtonImg" accessibleRole="BUTTON" fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-					<image>
-						<Image url="@../../../Assets/Icons/loadGame.png" />
-					</image>
-				</ImageView>
-			</graphic>
+		<Button fx:id="loadGameButton" layoutX="84.0" layoutY="580.0" mnemonicParsing="false" onMouseClicked="#openLoadGameMenu" prefHeight="40.0" prefWidth="44.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="19.040414629949055" AnchorPane.leftAnchor="84.0">
+         <graphic>
+      				<ImageView fx:id="loadGameButtonImg" accessibleRole="BUTTON" fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+      					<image>
+      						<Image url="@../../../Assets/Icons/loadGame.png" />
+      					</image>
+      				</ImageView>
+         </graphic>
 		</Button>
-		<Button fx:id="quitGameButton" layoutX="187.0" layoutY="574.0" mnemonicParsing="false" onMouseClicked="#openQuitGameMenu" prefHeight="40.0" prefWidth="44.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="80.0">
-			<graphic>
-				<ImageView fx:id="quitGameButtonImg" accessibleRole="BUTTON" fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-					<image>
-						<Image url="@../../../Assets/Icons/quitGame.png" />
-					</image>
-				</ImageView>
-			</graphic>
+		<Button fx:id="quitGameButton" layoutX="238.0" layoutY="581.0" mnemonicParsing="false" onMouseClicked="#openQuitGameMenu" prefHeight="40.0" prefWidth="44.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="18.040414629949055" AnchorPane.rightAnchor="77.04435752067582">
+         <graphic>
+      				<ImageView fx:id="quitGameButtonImg" accessibleRole="BUTTON" fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+      					<image>
+      						<Image url="@../../../Assets/Icons/quitGame.png" />
+      					</image>
+      				</ImageView>
+         </graphic>
 		</Button>
 				<Text fill="WHITE" layoutX="136.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press Enter">
 					<font>
 						<Font name="Noto Looped Lao UI Bold" size="13.0" />
 					</font>
 				</Text>
-				<ImageView fx:id="handCursorTap" fitHeight="42.0" fitWidth="47.0" layoutX="250.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="164.0" AnchorPane.rightAnchor="165.1689010761504">
-					<image>
-						<Image url="@../../../Assets/Icons/HandTap.png" />
-					</image>
-				</ImageView>
 		<Group>
 			<children>
 				<ImageView fitHeight="40.0" fitWidth="46.0" layoutX="97.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -87,24 +81,15 @@
       				</Label>
 			</children>
 		</Group>
-		<Text fill="#dce0e2" layoutX="71.0" layoutY="619.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOAD              QUIT">
+		<Text fill="#dce0e2" layoutX="85.0" layoutY="630.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOAD                QUIT">
 			<font>
-				<Font name="Noto Looped Lao UI Bold" size="23.0" />
+				<Font name="Noto Looped Lao UI Bold" size="20.0" />
 			</font>
 		</Text>
-		<Group>
-			<children>
-				<Text fill="WHITE" layoutX="22.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WILL" wrappingWidth="213.4311981201173">
-					<font>
-						<Font name="Noto Looped Lao UI Bold" size="70.0" />
-					</font>
-				</Text>
-				<Text fill="WHITE" layoutX="120.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HERO" wrappingWidth="245.399627685547">
-					<font>
-						<Font name="Noto Looped Lao UI Bold" size="70.0" />
-					</font>
-				</Text>
-			</children>
-		</Group>
+      <ImageView fitHeight="196.0" fitWidth="259.0" layoutX="90.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Assets/Icons/title.png" />
+         </image>
+      </ImageView>
 	</children>
 </AnchorPane>
