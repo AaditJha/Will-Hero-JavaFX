@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="640.0" maxWidth="360.0" minHeight="640.0" minWidth="360.0" prefHeight="640.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.QuitGameSceneController">
+<AnchorPane maxHeight="640.0" maxWidth="360.0" minHeight="640.0" minWidth="360.0" onMouseClicked="#resumeGame" prefHeight="640.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.QuitGameSceneController">
 	<children>
 		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#105fb3" height="124.0" layoutX="69.0" layoutY="264.0" stroke="BLACK" strokeType="INSIDE" width="225.0" />
 		<Text fill="#dce0e2" layoutX="104.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUIT GAME?">

@@ -18,6 +18,7 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Will Hero");
 			Image icon = new Image("file:Assets/Icons/main_icon.ico");
+			primaryStage.setResizable(false);
 			primaryStage.getIcons().addAll(icon);
 			primaryStage.show();
 			

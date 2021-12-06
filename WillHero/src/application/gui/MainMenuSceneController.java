@@ -25,6 +25,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Popup;
+import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
@@ -73,7 +74,8 @@ public class MainMenuSceneController implements Initializable {
 		popup.onShowingProperty().set((e)->{
 			mainPane.setEffect(new GaussianBlur(5.0));
 		});
-		popup.show(mainPane.getScene().getWindow());
+		Window parentWindow = mainPane.getScene().getWindow();
+		popup.show(parentWindow,parentWindow.getX(),parentWindow.getY()+29);
 		QuitGameSceneController quitGameSceneController = (QuitGameSceneController) fxmlLoader.getController();
 		quitGameSceneController.setPopup(popup);
 		popup.onHidingProperty().set((e)->{
