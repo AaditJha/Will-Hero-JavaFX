@@ -1,20 +1,32 @@
 package application.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Pair;
+import javafx.stage.Popup;
+import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 
 public class MainMenuSceneController implements Initializable {
 	
@@ -40,7 +52,7 @@ public class MainMenuSceneController implements Initializable {
 	private Button settingsButton, loadGameButton, quitGameButton;
 	
 	@FXML
-	private ImageView dummyPlayer, settingsButtonImg, loadGameButtonImg, quitGameButtonImg;
+	private ImageView dummyPlayer, settingsButtonImg, loadGameButtonImg, quitGameButtonImg, mainTitle;
 	
 	@FXML
 	public void openSettings(MouseEvent event) {
@@ -53,8 +65,20 @@ public class MainMenuSceneController implements Initializable {
 	}
 	
 	@FXML
-	public void openQuitGameMenu(MouseEvent event) {
-		System.out.print("QUIT GAME MENU");
+	public void openQuitGameMenu(MouseEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		AnchorPane quitGamBorderPane = fxmlLoader.load(getClass().getResource("QuitGameScene.fxml").openStream());
+		Popup popup = new Popup();
+		popup.getContent().add(quitGamBorderPane);
+		popup.onShowingProperty().set((e)->{
+			mainPane.setEffect(new GaussianBlur(5.0));
+		});
+		popup.show(mainPane.getScene().getWindow());
+		QuitGameSceneController quitGameSceneController = (QuitGameSceneController) fxmlLoader.getController();
+		quitGameSceneController.setPopup(popup);
+		popup.onHidingProperty().set((e)->{
+			mainPane.setEffect(null);
+		});
 	}
 	
 	@FXML
@@ -64,13 +88,17 @@ public class MainMenuSceneController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
 		initializeClouds();
+		ParallelTransition parallelTransition = new ParallelTransition();
+		animatePlayer(parallelTransition);
+		animateClouds(parallelTransition);
+		animateTitle(parallelTransition);
+		parallelTransition.play();
 	}
 
 	private void initializeClouds() {
 		clouds = new ArrayList<ImageView>();
-		double[] cloudSizes = {0.20,0.25,0.30,0.20};
+		double[] cloudSizes = {0.15,0.20,0.25,0.20};
 		int[] startingPoints = {
 				0,	-140,
 			  -80,	  40,
@@ -87,5 +115,34 @@ public class MainMenuSceneController implements Initializable {
 		}
 		cloudsContainerPane.getChildren().addAll(clouds);
 	}
+
+	private void animatePlayer(ParallelTransition parallelTransition) {
+		TranslateTransition translateTransition = new TranslateTransition(Duration.millis(600),dummyPlayer);
+		translateTransition.setAutoReverse(true);
+		translateTransition.setCycleCount(Animation.INDEFINITE);
+		translateTransition.setByY(-50);
+		translateTransition.setInterpolator(Interpolator.EASE_OUT);
+		parallelTransition.getChildren().add(translateTransition);
+	}
+	
+	private void animateClouds(ParallelTransition parallelTransition) {
+		for(ImageView cloud: clouds) {
+			TranslateTransition translateTransition = new TranslateTransition(Duration.millis(10000),cloud);
+			translateTransition.setCycleCount(Animation.INDEFINITE);
+			translateTransition.setFromX(360);
+			translateTransition.setToX(-360);
+			translateTransition.setInterpolator(Interpolator.LINEAR);
+			parallelTransition.getChildren().add(translateTransition);
+		}
+	}
+
+	private void animateTitle(ParallelTransition parallelTransition) {
+		TranslateTransition translateTransition = new TranslateTransition(Duration.millis(2000),mainTitle);
+		translateTransition.setCycleCount(Animation.INDEFINITE);
+		translateTransition.setByY(5);
+		translateTransition.setAutoReverse(true);
+		parallelTransition.getChildren().add(translateTransition);
+	}
+
 	
 }

@@ -4,6 +4,8 @@ HEX used
 #6dd5fa
 #2980b9
 #105fb3
+#06d128
+#de0000
 
 Refs
 https://icon-icons.com/

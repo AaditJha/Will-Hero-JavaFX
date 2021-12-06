@@ -19,7 +19,7 @@
 				<Image url="@../../../Assets/Icons/mainScreenBG.png" />
 			</image>
 		</ImageView>
-		<ImageView fx:id="dummyPlayer" fitHeight="59.0" fitWidth="50.0" layoutX="160.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fx:id="dummyPlayer" fitHeight="59.0" fitWidth="50.0" layoutX="160.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../../../Assets/Sprites/Player.png" />
 			</image>
@@ -87,7 +87,7 @@
 				<Font name="Noto Looped Lao UI Bold" size="20.0" />
 			</font>
 		</Text>
-      <ImageView fitHeight="196.0" fitWidth="259.0" layoutX="90.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="mainTitle" fitHeight="196.0" fitWidth="259.0" layoutX="90.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Assets/Icons/title.png" />
          </image>
