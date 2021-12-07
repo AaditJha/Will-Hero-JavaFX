@@ -2,11 +2,12 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="640.0" maxWidth="360.0" minHeight="640.0" minWidth="360.0" onMouseClicked="#resumeGame" prefHeight="640.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.QuitGameSceneController">
+<AnchorPane maxHeight="640.0" maxWidth="360.0" minHeight="640.0" minWidth="360.0" prefHeight="640.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.QuitGameSceneController">
 	<children>
 		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#105fb3" height="124.0" layoutX="69.0" layoutY="264.0" stroke="BLACK" strokeType="INSIDE" width="225.0" />
 		<Text fill="#dce0e2" layoutX="104.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUIT GAME?">
@@ -24,5 +25,9 @@
 				<Font name="Noto Looped Lao UI Bold" size="20.0" />
 			</font>
 		</Button>
+      <Region layoutX="3.0" onMouseClicked="#resumeGame" prefHeight="263.0" prefWidth="360.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Region layoutX="13.0" layoutY="10.0" onMouseClicked="#resumeGame" prefHeight="253.0" prefWidth="360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Region layoutY="219.0" onMouseClicked="#resumeGame" prefHeight="237.0" prefWidth="71.0" AnchorPane.leftAnchor="0.0" />
+      <Region layoutX="288.0" layoutY="207.0" onMouseClicked="#resumeGame" prefHeight="237.0" prefWidth="64.0" AnchorPane.rightAnchor="0.0" />
 	</children>
 </AnchorPane>

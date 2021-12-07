@@ -36,15 +36,6 @@
 				<Font name="Noto Looped Lao UI Bold" size="26.0" />
 			</font>
 		</Label>
-		<Button fx:id="settingsButton" layoutX="7.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#openSettings" prefHeight="40.0" prefWidth="44.0" style="-fx-background-color: transparent;">
-			<graphic>
-				<ImageView fx:id="settingsButtonImg" accessibleRole="BUTTON" fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-					<image>
-						<Image url="@../../../Assets/Icons/settings.png" />
-					</image>
-				</ImageView>
-			</graphic>
-		</Button>
 		<Button fx:id="loadGameButton" layoutX="84.0" layoutY="580.0" mnemonicParsing="false" onMouseClicked="#openLoadGameMenu" prefHeight="40.0" prefWidth="44.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="19.040414629949055" AnchorPane.leftAnchor="84.0">
          <graphic>
       				<ImageView fx:id="loadGameButtonImg" accessibleRole="BUTTON" fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
@@ -90,6 +81,11 @@
       <ImageView fx:id="mainTitle" fitHeight="196.0" fitWidth="259.0" layoutX="90.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Assets/Icons/title.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="settingImageView" fitHeight="43.0" fitWidth="36.0" layoutX="14.0" layoutY="16.0" onMouseClicked="#openSettings" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Assets/Icons/volumeOn.png" />
          </image>
       </ImageView>
 	</children>
