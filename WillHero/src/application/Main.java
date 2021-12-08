@@ -22,14 +22,18 @@ public class Main extends Application {
 			primaryStage.setResizable(false);
 			primaryStage.getIcons().addAll(icon);
 			primaryStage.show();
-			primaryStage.setOnHiding((e)->{
-				Platform.exit();
-				System.exit(0);
-			});
+			
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void stop() {
+		System.out.println("WOW");
+
+		System.exit(0);
 	}
 	
 	public static void main(String[] args) {

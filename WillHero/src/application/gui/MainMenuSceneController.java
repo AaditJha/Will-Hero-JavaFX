@@ -9,6 +9,7 @@ import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,8 +38,8 @@ public class MainMenuSceneController implements Initializable {
 	
 	//Change this if you want to play with a different key than default that is carriage return.
 	private final String keyToPlayWith = "\r";
-	final Image volumeOn = new Image("file:Assets/Icons/volumeOn.png");
-	final Image volumeOff = new Image("file:Assets/Icons/volumeOff.png");
+	private final Image volumeOn = new Image("file:Assets/Icons/volumeOn.png");
+	private final Image volumeOff = new Image("file:Assets/Icons/volumeOff.png");
 	
 	@FXML
 	private AnchorPane mainPane, cloudsContainerPane;
@@ -64,6 +65,8 @@ public class MainMenuSceneController implements Initializable {
 	
 	private volumeSetting settings;
 	
+	private Popup quitGamePopup, loadGamePopup;
+	
 	@FXML
 	public void openSettings(MouseEvent event) {
 		settings.swapState();
@@ -71,29 +74,14 @@ public class MainMenuSceneController implements Initializable {
 	
 	@FXML
 	public void openLoadGameMenu(MouseEvent event) {
-		System.out.print("LOAD GAME MENU");
+		Window parentWindow = mainPane.getScene().getWindow();
+		loadGamePopup.show(parentWindow,parentWindow.getX(),parentWindow.getY()+29);
 	}
 	
 	@FXML
 	public void openQuitGameMenu(MouseEvent event) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader();
-		AnchorPane quitGamBorderPane = fxmlLoader.load(getClass().getResource("QuitGameScene.fxml").openStream());
-		Popup popup = new Popup();
-		popup.getContent().add(quitGamBorderPane);
-		popup.onShowingProperty().set((e)->{
-			mainPane.setEffect(new GaussianBlur(5.0));
-		});
 		Window parentWindow = mainPane.getScene().getWindow();
-		popup.show(parentWindow,parentWindow.getX(),parentWindow.getY()+29);
-		QuitGameSceneController quitGameSceneController = (QuitGameSceneController) fxmlLoader.getController();
-		quitGameSceneController.setPopup(popup);
-		popup.onHidingProperty().set((e)->{
-			mainPane.setEffect(null);
-			if(quitGameSceneController.isQuitGameRequested()) {
-				Stage primaryStage = (Stage) parentWindow;
-				primaryStage.close();
-			}
-		});
+		quitGamePopup.show(parentWindow,parentWindow.getX(),parentWindow.getY()+29);
 	}
 	
 	@FXML
@@ -112,7 +100,47 @@ public class MainMenuSceneController implements Initializable {
 		parallelTransition.play();
 		
 		settings = new volumeSetting(volumeOn, volumeOff, settingImageView);
+		try {
+			initializeQuitGamePopup();
+			initalizeLoadGamePopup();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+	}
+
+	private void initalizeLoadGamePopup() throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		AnchorPane loadGamBorderPane = fxmlLoader.load(getClass().getResource("LoadGameScene.fxml").openStream());
+		loadGamePopup = new Popup();
+		loadGamePopup.getContent().add(loadGamBorderPane);
+		loadGamePopup.onShowingProperty().set((e)->{
+			mainPane.setEffect(new GaussianBlur(5.0));
+		});
+		LoadGameSceneController loadGameSceneController = (LoadGameSceneController) fxmlLoader.getController();
+		loadGameSceneController.setPopup(loadGamePopup);
+		loadGamePopup.onHidingProperty().set((e)->{
+			mainPane.setEffect(null);
+		});
+	}
+
+	private void initializeQuitGamePopup() throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		AnchorPane quitGamBorderPane = fxmlLoader.load(getClass().getResource("QuitGameScene.fxml").openStream());
+		quitGamePopup = new Popup();
+		quitGamePopup.getContent().add(quitGamBorderPane);
+		quitGamePopup.onShowingProperty().set((e)->{
+			mainPane.setEffect(new GaussianBlur(5.0));
+		});
+		QuitGameSceneController quitGameSceneController = (QuitGameSceneController) fxmlLoader.getController();
+		quitGameSceneController.setPopup(quitGamePopup);
+		quitGamePopup.onHidingProperty().set((e)->{
+			mainPane.setEffect(null);
+			if(quitGameSceneController.isQuitGameRequested()) {
+				Platform.exit();
+			}
+		});
 	}
 
 	private void initializeClouds() {
@@ -158,7 +186,7 @@ public class MainMenuSceneController implements Initializable {
 	private void animateTitle(ParallelTransition parallelTransition) {
 		TranslateTransition translateTransition = new TranslateTransition(Duration.millis(2000),mainTitle);
 		translateTransition.setCycleCount(Animation.INDEFINITE);
-		translateTransition.setByY(5);
+		translateTransition.setByY(10);
 		translateTransition.setAutoReverse(true);
 		parallelTransition.getChildren().add(translateTransition);
 	}
