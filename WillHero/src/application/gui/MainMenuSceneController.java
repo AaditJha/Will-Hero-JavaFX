@@ -14,6 +14,8 @@ import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -37,14 +39,13 @@ import javafx.util.Duration;
 public class MainMenuSceneController implements Initializable {
 	
 	//Change this if you want to play with a different key than default that is carriage return.
-	private final String keyToPlayWith = "\r";
+	private final String keyToPlayWith = " ";
 	private final Image volumeOn = new Image("file:Assets/Icons/volumeOn.png");
 	private final Image volumeOff = new Image("file:Assets/Icons/volumeOff.png");
 	
 	@FXML
 	private AnchorPane mainPane, cloudsContainerPane;
 	
-	@FXML
 	private ArrayList<ImageView> clouds;
 	
 	@FXML
@@ -75,7 +76,7 @@ public class MainMenuSceneController implements Initializable {
 	@FXML
 	public void openLoadGameMenu(MouseEvent event) {
 		Window parentWindow = mainPane.getScene().getWindow();
-		loadGamePopup.show(parentWindow,parentWindow.getX(),parentWindow.getY()+29);
+ 		loadGamePopup.show(parentWindow,parentWindow.getX(),parentWindow.getY()+29);
 	}
 	
 	@FXML
@@ -85,8 +86,12 @@ public class MainMenuSceneController implements Initializable {
 	}
 	
 	@FXML
-	public void startNewGame(KeyEvent event) {
-		if(event.getCharacter().equals(keyToPlayWith)) System.out.print("NEW GAME STARTED"+(int)event.getCharacter().charAt(0)+" ");
+	public void startNewGame(KeyEvent event) throws IOException {
+		Stage primaryStage = (Stage)mainPane.getScene().getWindow();
+        Parent root = FXMLLoader.load((getClass().getResource("GameplayScene.fxml")));
+        primaryStage.setScene(new Scene(root));
+		primaryStage.show();
+		
 	}
 
 	@Override
@@ -192,32 +197,4 @@ public class MainMenuSceneController implements Initializable {
 	}
 
 	
-}
-
-class volumeSetting {
-	private ImageView graphic;
-	private Image selectedImage, unselectedImage;
-	private boolean selected;
-	
-	volumeSetting(Image selectedImage, Image unselectedImage, ImageView ref) {
-		this.graphic = ref;
-		this.selectedImage = selectedImage;
-		this.unselectedImage = unselectedImage;
-		this.selected = true;
-	}
-	
-	public boolean isSelected() {
-		return selected;
-	}
-	
-	public void swapState() {
-		if(this.isSelected()) {
-			graphic.setImage(unselectedImage);
-			selected = false;
-		}
-		else {
-			graphic.setImage(selectedImage);
-			selected = true;
-		}
-	}
 }
