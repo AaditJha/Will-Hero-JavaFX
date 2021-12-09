@@ -12,17 +12,17 @@
 		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#105fb3" height="124.0" layoutX="69.0" layoutY="264.0" stroke="BLACK" strokeType="INSIDE" width="225.0" />
 		<Text fill="#dce0e2" layoutX="104.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUIT GAME?">
 			<font>
-				<Font name="Noto Looped Lao UI Bold" size="23.0" />
+				<Font name="System Bold" size="23.0" />
 			</font>
 		</Text>
 		<Button fx:id="yesButton" layoutX="100.0" layoutY="320.0" mnemonicParsing="false" onMouseClicked="#quitGame" prefHeight="52.0" prefWidth="70.0" style="-fx-background-color: #de0000;" text="YES" textFill="WHITE">
 			<font>
-				<Font name="Noto Looped Lao UI Bold" size="20.0" />
+				<Font name="System Bold" size="20.0" />
 			</font>
 		</Button>
 		<Button fx:id="noButton" layoutX="189.0" layoutY="320.0" mnemonicParsing="false" onMouseClicked="#resumeGame" prefHeight="52.0" prefWidth="70.0" style="-fx-background-color: #08a322;" text="NO" textFill="WHITE">
 			<font>
-				<Font name="Noto Looped Lao UI Bold" size="20.0" />
+				<Font name="System Bold" size="20.0" />
 			</font>
 		</Button>
       <Region layoutX="3.0" onMouseClicked="#resumeGame" prefHeight="263.0" prefWidth="360.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />

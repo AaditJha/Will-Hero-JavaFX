@@ -14,7 +14,7 @@
 <AnchorPane fx:id="mainPane" maxHeight="640.0" maxWidth="360.0" minHeight="640.0" minWidth="360.0" onKeyTyped="#startNewGame" prefHeight="640.0" prefWidth="360.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #2980B9, #6DD5FA);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.MainMenuSceneController">
 	<children>
       <AnchorPane fx:id="cloudsContainerPane" layoutY="155.0" opacity="0.55" prefHeight="359.0" prefWidth="360.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-		<ImageView fitHeight="640.0" fitWidth="360.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="640.0" fitWidth="360.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../../../Assets/Icons/mainScreenBG.png" />
 			</image>
@@ -31,9 +31,9 @@
 				<Image url="@../../../Assets/Sprites/Coin.png" />
 			</image>
 		</ImageView>
-		<Label fx:id="coinCountLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" graphicTextGap="25.0" layoutX="222.0" layoutY="3.0" prefHeight="50.0" prefWidth="86.0" text="4098" textAlignment="RIGHT" textFill="#f8f357" AnchorPane.rightAnchor="52.70920301683981">
+		<Label fx:id="coinCountLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" graphicTextGap="25.0" layoutX="220.37655485646678" layoutY="8.0" prefHeight="50.0" prefWidth="86.0" text="4098" textAlignment="RIGHT" textFill="#f8f357" AnchorPane.rightAnchor="52.70920301683981">
 			<font>
-				<Font name="Noto Looped Lao UI Bold" size="26.0" />
+				<Font name="System Bold" size="26.0" />
 			</font>
 		</Label>
 		<Button fx:id="loadGameButton" layoutX="39.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#openLoadGameMenu" prefHeight="40.0" prefWidth="44.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0">
@@ -56,7 +56,7 @@
 		</Button>
 				<Text fill="WHITE" layoutX="136.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press Enter">
 					<font>
-						<Font name="Noto Looped Lao UI Bold" size="13.0" />
+						<Font name="System Bold" size="13.0" />
 					</font>
 				</Text>
 		<Group>
@@ -66,9 +66,9 @@
 						<Image url="@../../../Assets/Icons/highScore.png" />
 					</image>
 				</ImageView>
-      				<Label fx:id="highScoreCount" contentDisplay="RIGHT" graphicTextGap="25.0" layoutX="139.0" layoutY="3.0" prefHeight="50.0" prefWidth="86.0" text="117" textAlignment="RIGHT" textFill="#dce0e2">
+      				<Label fx:id="highScoreCount" contentDisplay="RIGHT" graphicTextGap="25.0" layoutX="139.0" layoutY="8.0" prefHeight="50.0" prefWidth="86.0" text="117" textAlignment="RIGHT" textFill="#dce0e2">
       					<font>
-      						<Font name="Noto Looped Lao UI Bold" size="26.0" />
+      						<Font name="System Bold" size="26.0" />
       					</font>
       				</Label>
 			</children>
