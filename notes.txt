@@ -10,3 +10,6 @@ HEX used
 Refs
 https://favpng.com/
 https://icon-icons.com/
+
+
+Move all the popups and initializable menus to main class so its accessible throughout the game.

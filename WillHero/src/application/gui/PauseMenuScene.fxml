@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane maxHeight="640.0" maxWidth="360.0" minHeight="640.0" minWidth="360.0" prefHeight="640.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.PauseMenuSceneController">
+	<children>
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#105fb3" height="124.0" layoutX="69.0" layoutY="264.0" stroke="BLACK" strokeType="INSIDE" width="225.0" />
+      <Region layoutX="3.0" onMouseClicked="#resumeGame" prefHeight="263.0" prefWidth="360.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Region layoutX="13.0" layoutY="10.0" onMouseClicked="#resumeGame" prefHeight="253.0" prefWidth="360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Region layoutY="219.0" onMouseClicked="#resumeGame" prefHeight="237.0" prefWidth="71.0" AnchorPane.leftAnchor="0.0" />
+      <Region layoutX="288.0" layoutY="207.0" onMouseClicked="#resumeGame" prefHeight="237.0" prefWidth="64.0" AnchorPane.rightAnchor="0.0" />
+      <ImageView fx:id="playButton" fitHeight="72.0" fitWidth="72.0" layoutX="87.0" layoutY="264.0" onMouseClicked="#resumeGame" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="87.0" AnchorPane.topAnchor="264.0">
+         <image>
+            <Image url="@../../../Assets/Icons/play.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="loadSaveButton" fitHeight="46.0" fitWidth="47.0" layoutX="100.0" layoutY="333.0" onMouseClicked="#loadSaveGame" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="261.0" AnchorPane.leftAnchor="100.0">
+         <image>
+            <Image url="@../../../Assets/Icons/loadGame.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="quitButton" fitHeight="46.0" fitWidth="47.0" layoutX="218.0" layoutY="334.0" onMouseClicked="#quitGame" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="260.0" AnchorPane.rightAnchor="95.7288818359375">
+         <image>
+            <Image url="@../../../Assets/Icons/quitGame.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="restartButton" fitHeight="46.0" fitWidth="47.0" layoutX="217.0" layoutY="277.0" onMouseClicked="#restartGame" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="97.0" AnchorPane.topAnchor="277.0">
+         <image>
+            <Image url="@../../../Assets/Icons/restartGame.png" />
+         </image>
+      </ImageView>
+	</children>
+</AnchorPane>

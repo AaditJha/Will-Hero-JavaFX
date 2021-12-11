@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
@@ -11,7 +15,7 @@
 <AnchorPane maxHeight="640.0" maxWidth="360.0" minHeight="640.0" minWidth="360.0" prefHeight="640.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.LoadGameSceneController">
 	<children>
 		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#105fb3" height="547.0" layoutX="20.0" layoutY="44.0" stroke="BLACK" strokeType="INSIDE" width="320.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0" />
-		<Text fill="#dce0e2" layoutX="81.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SAVED GAMES" wrappingWidth="198.50167846679688" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="80.49832153320312" AnchorPane.topAnchor="61.65087890625">
+		<Text fill="#dce0e2" layoutX="93.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SAVED GAMES" wrappingWidth="198.50167846679688" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="68.49832153320312" AnchorPane.topAnchor="56.65087890625">
 			<font>
 				<Font name="System Bold" size="23.0" />
 			</font>
@@ -30,6 +34,148 @@
       <Region layoutX="13.0" layoutY="10.0" onMouseClicked="#resumeGame" prefHeight="44.0" prefWidth="360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Region layoutY="40.0" onMouseClicked="#resumeGame" prefHeight="510.0" prefWidth="19.0" AnchorPane.leftAnchor="0.0" />
       <Region layoutX="288.0" layoutY="40.0" onMouseClicked="#resumeGame" prefHeight="554.0" prefWidth="20.0" AnchorPane.rightAnchor="0.0" />
-      <VBox fx:id="gameSlotsVBox" alignment="TOP_CENTER" layoutX="35.0" layoutY="131.0" prefHeight="366.0" prefWidth="291.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="34.0" />
+      <VBox fx:id="gameSlotsVBox" alignment="TOP_CENTER" layoutX="35.0" layoutY="131.0" prefHeight="366.0" prefWidth="291.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="34.0">
+         <children>
+            <Group>
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2980b9" height="84.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" width="275.0" />
+                  <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="206.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Assets/GameSnapshots/demo.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="14.0" layoutY="13.0" text="ABCDEF" textFill="#dce0e2">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </Label>
+                  <Text layoutX="14.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score" wrappingWidth="83.03429412841797">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coins" wrappingWidth="83.03429412841797">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Label layoutX="65.0" layoutY="39.0" text="112" textFill="#dce0e2">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="65.0" layoutY="55.0" prefHeight="21.0" prefWidth="64.0" text="408" textFill="#dce0e2">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group>
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2980b9" height="84.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" width="275.0" />
+                  <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="206.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Assets/GameSnapshots/demo.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="14.0" layoutY="13.0" text="Slot 2" textFill="#dce0e2">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </Label>
+                  <Text layoutX="14.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score" wrappingWidth="83.03429412841797">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coins" wrappingWidth="83.03429412841797">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Label layoutX="65.0" layoutY="39.0" text="80" textFill="#dce0e2">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="65.0" layoutY="55.0" prefHeight="21.0" prefWidth="64.0" text="120" textFill="#dce0e2">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group>
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2980b9" height="84.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" width="275.0" />
+                  <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="206.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Assets/GameSnapshots/placeholder.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="14.0" layoutY="13.0" text="Empty Slot 3" textFill="#dce0e2">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </Label>
+                  <Text layoutX="14.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score" wrappingWidth="83.03429412841797">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coins" wrappingWidth="83.03429412841797">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Label layoutX="65.0" layoutY="39.0" text="--" textFill="#dce0e2">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="65.0" layoutY="55.0" prefHeight="21.0" prefWidth="64.0" text="--" textFill="#dce0e2">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group>
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2980b9" height="84.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" width="275.0" />
+                  <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="206.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Assets/GameSnapshots/placeholder.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="14.0" layoutY="13.0" text="Empty Slot 4" textFill="#dce0e2">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </Label>
+                  <Text layoutX="14.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score" wrappingWidth="83.03429412841797">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coins" wrappingWidth="83.03429412841797">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Label layoutX="65.0" layoutY="39.0" text="--" textFill="#dce0e2">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="65.0" layoutY="55.0" prefHeight="21.0" prefWidth="64.0" text="--" textFill="#dce0e2">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+         </children></VBox>
 	</children>
 </AnchorPane>

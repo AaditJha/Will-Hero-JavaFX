@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.SequentialTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,13 +24,7 @@ public class QuitGameSceneController implements Initializable {
 	@FXML
 	private Button yesButton, noButton;
 	
-	private boolean quitGameRequested;
-	
 	private Popup popup;
-	
-	public boolean isQuitGameRequested() {
-		return quitGameRequested;
-	}
 	
 	public void setPopup(Popup popup) {
 		this.popup = popup;
@@ -37,7 +32,7 @@ public class QuitGameSceneController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		quitGameRequested = false;
+		//TODO
 	}
 	
 	public void resumeGame(MouseEvent event) {
@@ -45,8 +40,8 @@ public class QuitGameSceneController implements Initializable {
 	}
 	
 	public void quitGame(MouseEvent event) {
-		quitGameRequested = true;
 		popup.hide();
+		Platform.exit();
 	}
 
 }

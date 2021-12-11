@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="640.0" maxWidth="360.0" minHeight="640.0" minWidth="360.0" prefHeight="640.0" prefWidth="360.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #2980B9, #6DD5FA);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.GameplaySceneController">
+<AnchorPane fx:id="mainPane" maxHeight="640.0" maxWidth="360.0" minHeight="640.0" minWidth="360.0" prefHeight="640.0" prefWidth="360.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #2980B9, #6DD5FA);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.GameplaySceneController">
    <children>
       <AnchorPane fx:id="cloudsContainerPane" layoutY="165.0" opacity="0.55" prefHeight="359.0" prefWidth="360.0" />
       <ImageView fitHeight="640.0" fitWidth="360.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
@@ -45,17 +45,17 @@
                   <Image url="@../../../Assets/Sprites/windmillMid.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="windmillFan3" fitHeight="29.0" fitWidth="138.0" layoutX="-29.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="windmillFan3" fitHeight="29.0" fitWidth="138.0" layoutX="-32.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../Assets/Sprites/windmillFan.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="windmillFan1" fitHeight="29.0" fitWidth="138.0" layoutX="-33.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true" rotate="120.0">
+            <ImageView fx:id="windmillFan1" fitHeight="29.0" fitWidth="138.0" layoutX="-32.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true" rotate="120.0">
                <image>
                   <Image url="@../../../Assets/Sprites/windmillFan.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="windmillFan2" fitHeight="29.0" fitWidth="138.0" layoutX="-31.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true" rotate="240.0">
+            <ImageView fx:id="windmillFan2" fitHeight="29.0" fitWidth="138.0" layoutX="-33.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true" rotate="240.0">
                <image>
                   <Image url="@../../../Assets/Sprites/windmillFan.png" />
                </image>
@@ -77,30 +77,38 @@
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <ImageView fitHeight="71.0" fitWidth="62.0" layoutX="71.0" layoutY="569.0" opacity="0.45" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="80.0">
-         <image>
-            <Image url="@../../../Assets/Icons/weaponUI.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="50.0" fitWidth="14.0" layoutX="105.0" layoutY="575.0" opacity="0.45" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../Assets/Sprites/ThrowingKnife2.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="71.0" fitWidth="62.0" layoutX="215.0" layoutY="569.0" opacity="0.45" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="80.0">
-         <image>
-            <Image url="@../../../Assets/Icons/weaponUI.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="50.0" fitWidth="14.0" layoutX="242.0" layoutY="575.0" opacity="0.45" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../Assets/Sprites/Sword.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="52.0" fitWidth="88.0" layoutX="11.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="52.0" fitWidth="88.0" layoutX="11.0" layoutY="8.0" onMouseClicked="#displayPauseMenu" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Assets/Icons/pause.png" />
          </image>
       </ImageView>
+      <Group fx:id="weapon1" layoutX="74.0" layoutY="564.0" onMouseClicked="#swapWeapon" opacity="0.45" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="78.0">
+         <children>
+            <ImageView fitHeight="71.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Assets/Icons/weaponUI.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="14.0" layoutX="25.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Assets/Sprites/Sword.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group fx:id="weapon2" layoutX="220.0" layoutY="564.0" onMouseClicked="#swapWeapon" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="78.0">
+         <children>
+            <ImageView fitHeight="71.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Assets/Icons/weaponUI.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="49.0" fitWidth="11.0" layoutX="25.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Assets/Sprites/ThrowingKnife2.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
    </children>
 </AnchorPane>

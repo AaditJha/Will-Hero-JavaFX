@@ -1,7 +1,6 @@
 package application;
 	
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
@@ -31,7 +30,7 @@ public class Main extends Application {
 	
 	@Override
 	public void stop() {
-		System.out.println("WOW");
+		System.out.println("CLEAN UP");
 
 		System.exit(0);
 	}

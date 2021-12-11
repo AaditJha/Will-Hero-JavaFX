@@ -116,8 +116,8 @@ public class MainMenuSceneController implements Initializable {
 	}
 
 	private void initalizeLoadGamePopup() throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader();
-		AnchorPane loadGamBorderPane = fxmlLoader.load(getClass().getResource("LoadGameScene.fxml").openStream());
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoadGameScene.fxml"));
+		AnchorPane loadGamBorderPane = (AnchorPane) fxmlLoader.load();
 		loadGamePopup = new Popup();
 		loadGamePopup.getContent().add(loadGamBorderPane);
 		loadGamePopup.onShowingProperty().set((e)->{
@@ -142,9 +142,6 @@ public class MainMenuSceneController implements Initializable {
 		quitGameSceneController.setPopup(quitGamePopup);
 		quitGamePopup.onHidingProperty().set((e)->{
 			mainPane.setEffect(null);
-			if(quitGameSceneController.isQuitGameRequested()) {
-				Platform.exit();
-			}
 		});
 	}
 

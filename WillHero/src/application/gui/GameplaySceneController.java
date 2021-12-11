@@ -1,5 +1,6 @@
 package application.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -11,17 +12,20 @@ import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point3D;
 import javafx.scene.control.Label;
-
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.image.ImageView;
-
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
+import javafx.stage.Popup;
+import javafx.stage.Window;
 import javafx.util.Duration;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -32,8 +36,11 @@ public class GameplaySceneController implements Initializable {
 
 	private ArrayList<ImageView> clouds;
 	
+	private Popup pauseMenuPopup;
+	private boolean weapon1Selected;
+	
 	@FXML
-	private AnchorPane cloudsContainerPane;
+	private AnchorPane cloudsContainerPane,mainPane;
 	@FXML
 	private ImageView dummyPlayer;
 	@FXML
@@ -56,10 +63,13 @@ public class GameplaySceneController implements Initializable {
 	private ImageView dummyOrc;
 	@FXML
 	private Label currentScoreLabel;
+	@FXML
+	private Group weapon1, weapon2;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+		weapon1Selected = false;
 		initializeClouds();
 		ParallelTransition parallelTransition = new ParallelTransition();
 		animatePlayer(parallelTransition);
@@ -80,9 +90,38 @@ public class GameplaySceneController implements Initializable {
 		animateWindMill(parallelTransition,windmillFan3);
 		animateOrc(parallelTransition);
 		animateChest(parallelTransition);
-		
+
 		parallelTransition.play();
+		try {
+			initializePauseMenuPopup();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
+	
+	@FXML
+	private void displayPauseMenu(MouseEvent event) {
+		Window parentWindow = mainPane.getScene().getWindow();
+ 		pauseMenuPopup.show(parentWindow,parentWindow.getX(),parentWindow.getY()+29);
+	}
+	
+    @FXML
+    void swapWeapon(MouseEvent event) {
+    	if(weapon1Selected && weapon2 == event.getSource()) {
+    		weapon1.setOpacity(0.45);
+    		weapon2.setOpacity(1);
+    		weapon1Selected = false;
+    		System.out.println("WEAPON 2 SELECTED");
+    	}
+    	else if(weapon1 == event.getSource()) {
+    		weapon2.setOpacity(0.45);
+    		weapon1.setOpacity(1);
+    		weapon1Selected = true;
+    		System.out.println("WEAPON 1 SELECTED");
+    	}
+    }
 	
 	private void animateChest(ParallelTransition parallelTransition) {
 		SequentialTransition sequentialTransition = new SequentialTransition(dummyChest);
@@ -178,6 +217,20 @@ public class GameplaySceneController implements Initializable {
 		}
 	}
 
+	private void initializePauseMenuPopup() throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PauseMenuScene.fxml"));
+		AnchorPane pauseMenuAnchorPane = (AnchorPane) fxmlLoader.load();
+		pauseMenuPopup = new Popup();
+		pauseMenuPopup.getContent().add(pauseMenuAnchorPane);
+		pauseMenuPopup.onShowingProperty().set((e)->{
+			mainPane.setEffect(new GaussianBlur(5.0));
+		});
+		PauseMenuSceneController pauseMenuSceneController = (PauseMenuSceneController) fxmlLoader.getController();
+		pauseMenuSceneController.setPopup(pauseMenuPopup);
+		pauseMenuPopup.onHidingProperty().set((e)->{
+			mainPane.setEffect(null);
+		});
+	}
 	
 
 }
