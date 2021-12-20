@@ -16,4 +16,14 @@ public class WorldVec2 {
 		return this.posY;
 	}
 	
+	public void add(WorldVec2 vec) {
+		posX = posX + vec.getX();
+		posY = posY + vec.getY();
+	}
+	
+	public void subtract(WorldVec2 vec) {
+		posX = posX - vec.getX();
+		posY = posY - vec.getY();
+	}
+	
 }

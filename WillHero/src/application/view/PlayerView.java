@@ -31,19 +31,12 @@ import javafx.scene.transform.Translate;
 import javafx.util.Duration;
 
 public class PlayerView extends WorldObject{
-	private final TranslateTransition jumpAnimation;
-	private final ParallelTransition moveForward;
 	private final double ORIGINAL_SCALE = 0.35;
-	private final WorldVec2 PLAYER_POS;
 
 	public PlayerView(WorldVec2 pos, String url) {
 		super(pos, new ImageView(new Image(url)));
-		PLAYER_POS = pos;
-		this.jumpAnimation = new TranslateTransition();
-		this.moveForward = new ParallelTransition();
 		getNode().setScaleX(ORIGINAL_SCALE);
 		getNode().setScaleY(ORIGINAL_SCALE);
-		setAnim();
 	}
 
 	@Override
@@ -58,47 +51,9 @@ public class PlayerView extends WorldObject{
 		getNode().setImage(new Image(url));
 	}
 	
-	public void setAnim() {
-		jumpAnimation.setDuration(Duration.millis(600));
-		jumpAnimation.setNode(getNode());
-		jumpAnimation.setAutoReverse(true);
-		jumpAnimation.setCycleCount(Animation.INDEFINITE);
-		jumpAnimation.setByY(-50);
-		jumpAnimation.setInterpolator(Interpolator.EASE_OUT);
-		jumpAnimation.play();
-		
-		ScaleTransition squish = new ScaleTransition(Duration.millis(100),getNode());
-		squish.setToY(0.65*ORIGINAL_SCALE);
-		ScaleTransition stretch = new ScaleTransition(Duration.millis(400),getNode());
-		stretch.setToY(ORIGINAL_SCALE);
-		stretch.setDelay(Duration.millis(100));
-		TranslateTransition move = new TranslateTransition(Duration.millis(400),getNode());
-		move.setByX(60);
-		moveForward.getChildren().addAll(squish,move,stretch);
-	}
-	
-	public void move() {
-		jumpAnimation.pause();
-		moveForward.stop();
-		moveForward.play();
-//		System.out.println("WERE AT: "+getPosX());
-		moveForward.setOnFinished(e->{
-			getNode().setLayoutX(getNode().getLayoutX()+getNode().getTranslateX());
-			getNode().setTranslateX(0);
-			System.out.println("NOW AT: "+getPosX());
-			if(getPosX() > 220) {
-				System.out.println("EVENT FIRED");
-				getNode().fireEvent(new PlayerOutEvent(getPosX()-PLAYER_POS.getX()));
-			}
-			jumpAnimation.play();
-		});
-		
-	}
-	
-//	public ActionEvent 
 	
 	@Override
 	public void stopAnimation() {
-		jumpAnimation.stop();
+		//TODO
 	}
 }
