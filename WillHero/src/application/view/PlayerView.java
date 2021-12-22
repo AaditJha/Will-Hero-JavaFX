@@ -6,7 +6,6 @@ import application.CustomEvent;
 import application.PlayerOutEvent;
 import application.PlayerOutEventHandler;
 import application.WorldObject;
-import application.WorldVec2;
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.Interpolator;
@@ -33,7 +32,7 @@ import javafx.util.Duration;
 public class PlayerView extends WorldObject{
 	private final double ORIGINAL_SCALE = 0.35;
 
-	public PlayerView(WorldVec2 pos, String url) {
+	public PlayerView(Point2D pos, String url) {
 		super(pos, new ImageView(new Image(url)));
 		getNode().setScaleX(ORIGINAL_SCALE);
 		getNode().setScaleY(ORIGINAL_SCALE);
@@ -43,7 +42,7 @@ public class PlayerView extends WorldObject{
 	public ImageView getNode() { return (ImageView) super.getNode(); }
 	public double getPosX() { return getNode().getLayoutX(); }
 	public double getPosY() { return getNode().getLayoutY(); }
-	public void setPos(WorldVec2 pos) { 
+	public void setPos(Point2D pos) { 
 		getNode().relocate(pos.getX(), pos.getY());
 	}
 	

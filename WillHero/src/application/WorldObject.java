@@ -1,18 +1,19 @@
 package application;
 
 import javafx.collections.ObservableList;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 
 public class WorldObject implements Spawnable, Collidable, Animated {
 	
 	public Node node;
-	public WorldObject(WorldVec2 boundingBoxCenter, Node node) {
+	public WorldObject(Point2D boundingBoxCenter, Node node) {
 		this.node = node;
 		node.setLayoutX(boundingBoxCenter.getX());
 		node.setLayoutY(boundingBoxCenter.getY());
 	}
 	
-	public void relocate(WorldVec2 newLoc) {
+	public void relocate(Point2D newLoc) {
 		node.setLayoutX(newLoc.getX());
 		node.setLayoutY(newLoc.getY());
 	}

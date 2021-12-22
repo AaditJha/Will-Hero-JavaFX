@@ -8,7 +8,6 @@ import application.PlayerOutEvent;
 import application.PlayerOutEventHandler;
 import application.Spawnable;
 import application.WorldObject;
-import application.WorldVec2;
 import application.controller.PlayerController;
 import javafx.animation.AnimationTimer;
 import javafx.animation.ParallelTransition;
@@ -37,9 +36,9 @@ public class GameView {
 	public GameView() {
 		worldObjects = FXCollections.observableArrayList();
 		root = new Pane();
-		root.setMaxSize(Main.DIMENSIONS.getX(),Main.DIMENSIONS.getY());
-		root.setPrefSize(Main.DIMENSIONS.getX(),Main.DIMENSIONS.getY());
-		root.setMinSize(Main.DIMENSIONS.getX(),Main.DIMENSIONS.getY());
+		root.setMaxSize(Main.DIMENSIONS.getWidth(), Main.DIMENSIONS.getHeight());
+		root.setPrefSize(Main.DIMENSIONS.getWidth(),Main.DIMENSIONS.getHeight());
+		root.setMinSize(Main.DIMENSIONS.getWidth(),Main.DIMENSIONS.getHeight());
 		root.setStyle("-fx-background-color:  linear-gradient(from 25% 25% to 100% 100%, #2980B9, #6DD5FA)");
 	}
 
@@ -51,6 +50,24 @@ public class GameView {
 			root.getChildren().add(worldObject.getNode());
 		}
 		root.getChildren().add(playerController.getView().getNode());
-		playerController.jump();
+		worldObjects.add(playerController.getView());
+	}
+
+	public void update(PlayerController playerController) {
+		playerController.getView().relocate(playerController.getModel().getPosition());
+//		for(WorldObject worldObject: worldObjects) {
+//			if(worldObject.equals(playerController.getView())) {
+//				worldObject.relocate(playerController.getModel().getPosition());
+//			}
+//		}
+	}
+
+	public void checkCollision(PlayerController playerController) {
+		Node playerNode = playerController.getView().getNode();
+		for(WorldObject worldObject: worldObjects) {
+			if(!worldObject.equals(playerController.getView()) && worldObject.getNode().getBoundsInParent().intersects(playerNode.getBoundsInParent())) {
+				playerController.getModel().jumpUp();
+			}
+		}
 	}
 }

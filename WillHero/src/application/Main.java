@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Dimension2D;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.Parent;
@@ -21,26 +22,14 @@ import javafx.scene.input.KeyEvent;
 
 
 public class Main extends Application {
-	public static final WorldVec2 DIMENSIONS = new WorldVec2(360, 640);
-	private final WorldVec2 PLAYER_POS = new WorldVec2(50, DIMENSIONS.getY()/2);
-	private final String playerSpriteURL = "file:Assets/Sprites/Player.png";
+	public static final Dimension2D DIMENSIONS = new Dimension2D(360, 640);
 	
-	private final Game game;
 	private final GameController gameController;
-	private final GameView gameView;
-	private final Player player;
-	private final PlayerView playerView;
-	private final PlayerController playerController;
 	private boolean gameRunning;
 	
 	public Main() {
 		System.out.println("RUNNING");
-		this.player = new Player(1.0);
-		this.playerView = new PlayerView(PLAYER_POS, playerSpriteURL);
-		this.playerController = new PlayerController(player, playerView);
-		this.game = new Game(player);
-		this.gameView = new GameView();
-		this.gameController = new GameController(gameView, game, playerController);
+		this.gameController = new GameController();
 		this.gameRunning = false;
 	}
 
@@ -57,7 +46,7 @@ public class Main extends Application {
 			Image icon = new Image("file:Assets/Icons/main_icon.ico");
 			primaryStage.setResizable(false);
 			primaryStage.getIcons().addAll(icon);
-			gameView.setStageScene(primaryStage,playerController);
+			gameController.setStage(primaryStage);
 			primaryStage.show();
 			
 			primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
