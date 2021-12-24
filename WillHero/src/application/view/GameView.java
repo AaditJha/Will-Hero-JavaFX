@@ -1,5 +1,6 @@
 package application.view;
 
+
 import application.CustomEvent;
 import application.Game;
 import application.LevelGenerator;
@@ -53,13 +54,16 @@ public class GameView {
 		worldObjects.add(playerController.getView());
 	}
 
-	public void update(PlayerController playerController) {
+	public void update(PlayerController playerController, Point2D PLAYER_POS) {
 		playerController.getView().relocate(playerController.getModel().getPosition());
-//		for(WorldObject worldObject: worldObjects) {
-//			if(worldObject.equals(playerController.getView())) {
-//				worldObject.relocate(playerController.getModel().getPosition());
-//			}
-//		}
+		Node playerNode = playerController.getView().getNode();
+		Point2D diff = PLAYER_POS.subtract(new Point2D(playerNode.getLayoutX(), playerNode.getLayoutY()));
+		double moveBy = diff.getX();
+//		if(moveBy < -250)System.out.println("YES");
+		System.out.println(moveBy);
+		for(WorldObject worldObject: worldObjects) {
+			worldObject.getNode().setTranslateX(moveBy);
+		}
 	}
 
 	public void checkCollision(PlayerController playerController) {

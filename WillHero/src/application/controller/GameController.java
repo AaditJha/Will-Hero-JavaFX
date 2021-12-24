@@ -28,7 +28,7 @@ public class GameController {
 		playerView = new PlayerView(PLAYER_POS, playerSpriteURL);
 		playerController = new PlayerController(player, playerView);
 		gameView = new GameView();
-		game = new Game(player);
+		game = new Game(playerController);
 		spacePressed = false;
 	}
 	
@@ -56,7 +56,7 @@ public class GameController {
 			@Override
 			public void tick(float frameDuration) {
 				game.update(frameDuration,spacePressed);
-				gameView.update(playerController);
+				gameView.update(playerController,PLAYER_POS);
 			}
 		};
 		GameLoop backgroundLoop = new GameLoop() {

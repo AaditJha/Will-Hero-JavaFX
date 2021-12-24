@@ -55,4 +55,12 @@ public class PlayerView extends WorldObject{
 	public void stopAnimation() {
 		//TODO
 	}
+
+	public void squish() {
+		getNode().setScaleY(ORIGINAL_SCALE*0.75);
+	}
+
+	public void unsquish() {
+		getNode().setScaleY(ORIGINAL_SCALE);	
+	}
 }

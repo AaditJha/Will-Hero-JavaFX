@@ -5,25 +5,30 @@ import application.view.PlayerView;
 
 public class Game {
 	private boolean innerSpaceControl, playerMoving;
-	private Player player;
+	private PlayerController playerController;
 	
-	public Game(Player player) {
-		this.player = player;
+	public Game(PlayerController playerController) {
+		this.playerController = playerController;
 		this.playerMoving = false;
 		this.innerSpaceControl = false;
 	}
 
 	public void update(float frameDuration,boolean spacePressed) {
-		if(!playerMoving)player.jump(frameDuration);
+		if(!playerMoving)playerController.getModel().jump(frameDuration);
 		else {
-			playerMoving = player.addDrag();
+			playerMoving = playerController.getModel().addDrag();
+			if(!playerMoving) playerController.getView().unsquish();
 		}
 		if(spacePressed && !innerSpaceControl) {
-			player.move(frameDuration);
+			playerController.getModel().move(frameDuration);
+			playerController.getView().squish();
 			playerMoving = true;
 			innerSpaceControl = true;
 		}
-		if(!spacePressed && innerSpaceControl) innerSpaceControl = false;
+		if(!spacePressed && innerSpaceControl) {
+			innerSpaceControl = false;
+			playerController.getModel().jump(frameDuration);
+		}
 	}
 	
 	
