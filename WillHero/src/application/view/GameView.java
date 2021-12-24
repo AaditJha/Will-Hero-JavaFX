@@ -59,8 +59,6 @@ public class GameView {
 		Node playerNode = playerController.getView().getNode();
 		Point2D diff = PLAYER_POS.subtract(new Point2D(playerNode.getLayoutX(), playerNode.getLayoutY()));
 		double moveBy = diff.getX();
-//		if(moveBy < -250)System.out.println("YES");
-		System.out.println(moveBy);
 		for(WorldObject worldObject: worldObjects) {
 			worldObject.getNode().setTranslateX(moveBy);
 		}
@@ -69,9 +67,16 @@ public class GameView {
 	public void checkCollision(PlayerController playerController) {
 		Node playerNode = playerController.getView().getNode();
 		for(WorldObject worldObject: worldObjects) {
-			if(!worldObject.equals(playerController.getView()) && worldObject.getNode().getBoundsInParent().intersects(playerNode.getBoundsInParent())) {
-				playerController.getModel().jumpUp();
-			}
+				if(!worldObject.equals(playerController.getView()) && worldObject.getNode().getBoundsInParent().intersects(playerNode.getBoundsInParent())) {
+					if(worldObject.isCollidable()) {
+						double playerVelocityX = playerController.getModel().getVelocity().getX();
+						if(playerVelocityX == 0)playerController.getModel().jumpUp();
+						else playerController.getModel().setVelocity(new Point2D(playerVelocityX, 0.0));
+					}
+					else {
+						worldObject.playerInteracted();
+					}
+				}
 		}
 	}
 }

@@ -13,6 +13,14 @@ public class WorldObject implements Spawnable, Collidable, Animated {
 		node.setLayoutY(boundingBoxCenter.getY());
 	}
 	
+	public boolean isCollidable() {
+		return true;
+	}
+	
+	public void setNode(Node node) {
+		this.node = node;
+	}
+	
 	public void relocate(Point2D newLoc) {
 		node.setLayoutX(newLoc.getX());
 		node.setLayoutY(newLoc.getY());
@@ -47,6 +55,10 @@ public class WorldObject implements Spawnable, Collidable, Animated {
 	@Override
 	public void stopAnimation() {
 		// TODO Auto-generated method stub
+		return;
+	}
+
+	public void playerInteracted() {
 		return;
 	}
 

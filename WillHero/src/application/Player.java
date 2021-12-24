@@ -3,10 +3,13 @@ package application;
 import javafx.geometry.Point2D;
 
 public class Player extends RigidBody {
+	private static final double DRAG = -0.005;
+	private static final double THRESHOLD = 0.001;
+	private static final double VERT_JUMP_VEL = -0.6;
 
 	public Player(double mass, Point2D pos) {
 		super(mass, pos);
-		super.setVelocity(new Point2D(0, -0.5));
+		super.setVelocity(new Point2D(0, VERT_JUMP_VEL));
 		// TODO Auto-generated constructor stub
 	}
 
@@ -16,7 +19,7 @@ public class Player extends RigidBody {
 	}
 	
 	public void jumpUp() {
-		super.setVelocity(new Point2D(super.getVelocity().getX(), -0.5));
+		super.setVelocity(new Point2D(super.getVelocity().getX(), VERT_JUMP_VEL));
 	}
 	
 	public void move(float frameDuration) {
@@ -29,8 +32,8 @@ public class Player extends RigidBody {
 
 	public boolean addDrag() {
 		super.updatePosition();
-		super.updateVelocityX(-0.005);
-		if(super.getVelocity().getX() < 0.001) {
+		super.updateVelocityX(DRAG);
+		if(super.getVelocity().getX() < THRESHOLD) {
 			super.subtractVeclocity(new Point2D(super.getVelocity().getX(), 0));
 			return false;
 		}

@@ -12,8 +12,18 @@ public class LevelGenerator {
 
 	public static void generate(ObservableList<WorldObject> worldObjects) {
 		for(int i = 0; i < 100; i++) {
-			WorldObject worldObject = new WorldObject(new Point2D(i*255+1, 420), new Rectangle(250,10,Paint.valueOf(Color.RED.toString())));
+			WorldObject worldObject = new WorldObject(new Point2D(i*400+1, 420), new Rectangle(250,10,Paint.valueOf(Color.RED.toString())));
 			worldObject.spawn(worldObjects);
 		}
+		
+		
+		
+//		Chest tempChest = new Chest(new Point2D(480,325));
+//		tempChest.spawn(worldObjects);
+		
+		
+		
 	}
+	
+	
 }

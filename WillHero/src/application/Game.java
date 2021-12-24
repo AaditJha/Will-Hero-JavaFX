@@ -14,8 +14,8 @@ public class Game {
 	}
 
 	public void update(float frameDuration,boolean spacePressed) {
-		if(!playerMoving)playerController.getModel().jump(frameDuration);
-		else {
+		playerController.getModel().jump(frameDuration);
+		if(playerMoving) {
 			playerMoving = playerController.getModel().addDrag();
 			if(!playerMoving) playerController.getView().unsquish();
 		}
