@@ -3,11 +3,12 @@ package application;
 import javafx.geometry.Point2D;
 
 public class Player extends RigidBody {
+	private static final double mass = 1.0;
 	private static final double DRAG = -0.005;
 	private static final double THRESHOLD = 0.001;
-	private static final double VERT_JUMP_VEL = -0.6;
+	private static final double VERT_JUMP_VEL = -0.5;
 
-	public Player(double mass, Point2D pos) {
+	public Player( Point2D pos) {
 		super(mass, pos);
 		super.setVelocity(new Point2D(0, VERT_JUMP_VEL));
 		// TODO Auto-generated constructor stub

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="640.0" maxWidth="360.0" minHeight="640.0" minWidth="360.0" prefHeight="640.0" prefWidth="360.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #2980B9, #6DD5FA);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.WorldObjectSceneController">
+   <children>
+      <ImageView fx:id="chest" fitHeight="40.0" fitWidth="40.0" layoutX="308.0" layoutY="423.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Assets/Sprites/WeaponCrate.png" />
+         </image>
+      </ImageView>
+      <Group fx:id="obstacleWindMillGroup" layoutX="190.0" layoutY="293.0">
+         <children>
+            <ImageView fitHeight="245.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Assets/Background/Buildings/building2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="windmillPivot" fitHeight="40.0" fitWidth="50.0" layoutX="11.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Assets/Sprites/windmillMid.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="windmillFan3" fitHeight="29.0" fitWidth="138.0" layoutX="-32.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Assets/Sprites/windmillFan.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="windmillFan1" fitHeight="29.0" fitWidth="138.0" layoutX="-32.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true" rotate="120.0">
+               <image>
+                  <Image url="@../../../Assets/Sprites/windmillFan.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="windmillFan2" fitHeight="29.0" fitWidth="138.0" layoutX="-33.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true" rotate="240.0">
+               <image>
+                  <Image url="@../../../Assets/Sprites/windmillFan.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+   </children>
+</AnchorPane>

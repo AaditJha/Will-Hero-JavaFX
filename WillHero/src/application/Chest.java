@@ -1,5 +1,6 @@
 package application;
 
+import application.controller.PlayerController;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.SequentialTransition;
@@ -42,9 +43,10 @@ public class Chest extends WorldObject {
 	}
 	
 	@Override
-	public void playerInteracted() {
+	public void playerInteracted(PlayerController playerController) {
 		ImageView temp = (ImageView) super.getNode();
 		temp.setImage(chestOpen);
+		sequentialTransition.stop();
 	}
 	
 }

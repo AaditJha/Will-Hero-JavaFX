@@ -37,7 +37,7 @@
          <children>
             <ImageView fitHeight="245.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../Assets/Background/BuildingBg2.png" />
+                  <Image url="@../../../Assets/Background/Buildings/building2.png" />
                </image>
             </ImageView>
             <ImageView fx:id="windmillPivot" fitHeight="40.0" fitWidth="50.0" layoutX="11.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">

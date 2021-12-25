@@ -50,9 +50,24 @@ public abstract class RigidBody {
 		velocity = vec;
 	}
 
+	public void collide(RigidBody body2) {
+		double mass2 = body2.getMass();
+		double velocity1X = ((mass - mass2)/(mass+mass2))*getVelocity().getX() + 
+				(2*mass2*body2.getVelocity().getX()/(mass+mass2));
+		double velocity2X = (2*mass*getVelocity().getX()/(mass+mass2) + 
+				((mass2 - mass)*body2.getVelocity().getX())/(mass+mass2));
+		
+		setVelocity(new Point2D(velocity1X, getVelocity().getY()));
+		body2.setVelocity(new Point2D(velocity2X, body2.getVelocity().getY()));
+	}
+	
 	public void updatePositionX() {
 		Point2D tempVelocity = new Point2D(velocity.getX(),0);
 		position = position.add(tempVelocity);
+	}
+
+	public double getMass() {
+		return mass;
 	}
 	
 }

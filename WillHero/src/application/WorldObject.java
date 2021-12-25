@@ -1,5 +1,6 @@
 package application;
 
+import application.controller.PlayerController;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -58,8 +59,11 @@ public class WorldObject implements Spawnable, Collidable, Animated {
 		return;
 	}
 
-	public void playerInteracted() {
-		return;
+	public void playerInteracted(PlayerController playerController) {
+
+		double playerVelocityX = playerController.getModel().getVelocity().getX();
+		if(playerVelocityX == 0)playerController.getModel().jumpUp();
+		else playerController.getModel().setVelocity(new Point2D(playerVelocityX, 0.0));
 	}
 
 }

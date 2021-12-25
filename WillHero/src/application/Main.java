@@ -39,7 +39,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 
-//			Parent root = FXMLLoader.load(getClass().getResource("gui/MainScene.fxml"));
+//			Parent root = FXMLLoader.load(getClass().getResource("gui/GameplayScene.fxml"));
 //			Scene scene = new Scene(root);
 //			primaryStage.setScene(scene);
 			primaryStage.setTitle("Will Hero");

@@ -2,18 +2,27 @@ package application;
 
 import application.controller.PlayerController;
 import application.view.PlayerView;
+import javafx.collections.ObservableList;
 
 public class Game {
 	private boolean innerSpaceControl, playerMoving;
 	private PlayerController playerController;
+	private ObservableList<OrcsController> orcsControllers;
 	
-	public Game(PlayerController playerController) {
+	public Game(PlayerController playerController, ObservableList<OrcsController> orcsControllers) {
 		this.playerController = playerController;
 		this.playerMoving = false;
 		this.innerSpaceControl = false;
+		this.orcsControllers = orcsControllers;
 	}
 
 	public void update(float frameDuration,boolean spacePressed) {
+		for(OrcsController orcsController: orcsControllers) {
+			orcsController.getModel().jump(frameDuration);
+			if(orcsController.getModel().getVelocity().getX() > 0.001) {
+				orcsController.getModel().addDrag();
+			}
+		}
 		playerController.getModel().jump(frameDuration);
 		if(playerMoving) {
 			playerMoving = playerController.getModel().addDrag();
