@@ -32,8 +32,8 @@ import javafx.util.Duration;
 public class PlayerView extends WorldObject{
 	private final double ORIGINAL_SCALE = 0.35;
 
-	public PlayerView(Point2D pos, String url) {
-		super(pos, new ImageView(new Image(url)));
+	public PlayerView(Point2D pos, Image img) {
+		super(pos, new ImageView(img));
 		getNode().setScaleX(ORIGINAL_SCALE);
 		getNode().setScaleY(ORIGINAL_SCALE);
 	}

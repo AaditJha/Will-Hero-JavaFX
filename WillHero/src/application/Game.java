@@ -1,8 +1,10 @@
 package application;
 
 import application.controller.PlayerController;
+import application.view.GameView;
 import application.view.PlayerView;
 import javafx.collections.ObservableList;
+import javafx.geometry.Point2D;
 
 public class Game {
 	private boolean innerSpaceControl, playerMoving;

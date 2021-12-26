@@ -7,6 +7,7 @@ import application.CustomEvent;
 import application.FallingPlatform;
 import application.Game;
 import application.GreenOrcView;
+import application.Lance;
 import application.LevelGenerator;
 import application.Main;
 import application.OrcsController;
@@ -14,6 +15,8 @@ import application.OrcsView;
 import application.PlayerOutEvent;
 import application.PlayerOutEventHandler;
 import application.Spawnable;
+import application.ThrowingKnives;
+import application.Weapon;
 import application.WorldObject;
 import application.controller.PlayerController;
 import javafx.animation.AnimationTimer;
@@ -61,6 +64,8 @@ public class GameView {
 		}
 		root.getChildren().add(playerController.getView().getNode());
 		worldObjects.add(playerController.getView());
+		playerController.getModel().getHelmet().getThrowingKnife().setRoot(root);
+		playerController.getModel().getHelmet().getLance().setRoot(root);
 	}
 
 	public void update(PlayerController playerController, Point2D PLAYER_POS, ObservableList<OrcsController> orcsControllers) {
@@ -78,6 +83,26 @@ public class GameView {
 
 	public void checkCollision(PlayerController playerController, ObservableList<OrcsController>orcsControllers) {
 		Node playerNode = playerController.getView().getNode();
+		if(playerController.getModel().getHelmet().getEquippedWeapon() instanceof ThrowingKnives) {
+			ThrowingKnives throwingKnives = (ThrowingKnives) playerController.getModel().getHelmet().getEquippedWeapon();
+			for(OrcsController orcsController: orcsControllers) {
+			ObservableList<ImageView> throwingKnivesList = throwingKnives.getList();
+			for(int i = 0; i < throwingKnivesList.size(); i++) {
+				if(orcsController.getView().getNode().getBoundsInParent().intersects(throwingKnivesList.get(i).getBoundsInParent())) {
+					throwingKnives.damageOrc(orcsController,i);
+					}
+				}
+			}
+		}
+		else {
+			Lance lance = (Lance) playerController.getModel().getHelmet().getEquippedWeapon();
+			for(OrcsController orcsController: orcsControllers) {
+				if(orcsController.getView().getNode().getBoundsInParent().intersects(lance.getNode().getBoundsInParent())) {
+					lance.damageOrc(orcsController);
+				}
+			}
+		}
+
 		for(WorldObject worldObject: worldObjects) {
 			for(OrcsController orcsController: orcsControllers) {
 				if(!worldObject.equals(orcsController.getView()) && !worldObject.equals(playerNode) &&

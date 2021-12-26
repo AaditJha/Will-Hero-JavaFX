@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import application.Game;
 import application.GameLoop;
+import application.Helmet;
 import application.Main;
 import application.OrcsController;
 import application.Player;
@@ -16,9 +17,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class GameController {
-	private final Point2D PLAYER_POS = new Point2D(50, Main.DIMENSIONS.getHeight()/2);
-	private final String playerSpriteURL = "file:Assets/Sprites/Player.png";
-	
+	private static final Point2D PLAYER_POS = new Point2D(50, Main.DIMENSIONS.getHeight()/2);
 	private GameView gameView;
 	private Game game;
 
@@ -32,11 +31,15 @@ public class GameController {
 	public GameController() {
 		orcsControllers = FXCollections.observableArrayList();
 		player = new Player(PLAYER_POS);
-		playerView = new PlayerView(PLAYER_POS, playerSpriteURL);
+		playerView = new PlayerView(PLAYER_POS,player.getHelmet().getPlayerHelmetIMG());
 		playerController = new PlayerController(player, playerView);
 		gameView = new GameView();
 		game = new Game(playerController,orcsControllers);
 		spacePressed = false;
+	}
+	
+	public static Point2D getPlayerPos() {
+		return PLAYER_POS;
 	}
 	
 	public void setStage(Stage primaryStage) {
