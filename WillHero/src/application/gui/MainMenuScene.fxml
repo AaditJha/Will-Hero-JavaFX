@@ -6,82 +6,82 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Polygon?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainPane" maxHeight="640.0" maxWidth="360.0" minHeight="640.0" minWidth="360.0" onKeyTyped="#startNewGame" prefHeight="640.0" prefWidth="360.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #2980B9, #6DD5FA);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.MainMenuSceneController">
+<AnchorPane fx:id="mainPane" maxHeight="640.0" maxWidth="360.0" minHeight="640.0" minWidth="360.0" prefHeight="640.0" prefWidth="360.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #2980B9, #6DD5FA);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.MainMenuSceneController">
 	<children>
-      <AnchorPane fx:id="cloudsContainerPane" layoutY="155.0" opacity="0.55" prefHeight="359.0" prefWidth="360.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-		<ImageView fitHeight="640.0" fitWidth="360.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
-			<image>
-				<Image url="@../../../Assets/Icons/mainScreenBG.png" />
-			</image>
-		</ImageView>
-		<ImageView fx:id="dummyPlayer" fitHeight="59.0" fitWidth="50.0" layoutX="160.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true">
-			<image>
-				<Image url="@../../../Assets/Sprites/Player.png" />
-			</image>
-		</ImageView>
-		<Rectangle fx:id="bottomBar" arcHeight="5.0" arcWidth="5.0" fill="#105fb3" height="74.0" layoutX="1.0" layoutY="565.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="360.0" />
-		<Polygon fx:id="topBar" fill="#105fb3" layoutX="196.0" layoutY="204.0" opacity="0.89" points="164.6441650390625, -150.0, 164.6441650390625, -190.0, -124.09070587158203, -190.0, -108.10645294189453, -172.05125427246094, -124.09070587158203, -150.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-		<ImageView fitHeight="30.0" fitWidth="26.0" layoutX="315.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-			<image>
-				<Image url="@../../../Assets/Sprites/Coin.png" />
-			</image>
-		</ImageView>
-		<Label fx:id="coinCountLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" graphicTextGap="25.0" layoutX="220.37655485646678" layoutY="8.0" prefHeight="50.0" prefWidth="86.0" text="4098" textAlignment="RIGHT" textFill="#f8f357" AnchorPane.rightAnchor="52.70920301683981">
-			<font>
-				<Font name="System Bold" size="26.0" />
-			</font>
-		</Label>
-		<Button fx:id="loadGameButton" layoutX="39.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#openLoadGameMenu" prefHeight="40.0" prefWidth="44.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0">
-         <graphic>
-      				<ImageView fx:id="loadGameButtonImg" accessibleRole="BUTTON" fitHeight="75.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
-      					<image>
-      						<Image url="@../../../Assets/Icons/loadGame.png" />
-      					</image>
-      				</ImageView>
-         </graphic>
-		</Button>
-		<Button fx:id="quitGameButton" layoutX="264.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#openQuitGameMenu" prefHeight="40.0" prefWidth="44.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="50.0">
-         <graphic>
-      				<ImageView fx:id="quitGameButtonImg" accessibleRole="BUTTON" fitHeight="61.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
-      					<image>
-      						<Image url="@../../../Assets/Icons/quitGame.png" />
-      					</image>
-      				</ImageView>
-         </graphic>
-		</Button>
-				<Text fill="WHITE" layoutX="136.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press Space">
-					<font>
-						<Font name="System Bold" size="13.0" />
-					</font>
-				</Text>
-		<Group>
-			<children>
-				<ImageView fitHeight="40.0" fitWidth="46.0" layoutX="97.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-					<image>
-						<Image url="@../../../Assets/Icons/highScore.png" />
-					</image>
-				</ImageView>
-      				<Label fx:id="highScoreCount" contentDisplay="RIGHT" graphicTextGap="25.0" layoutX="139.0" layoutY="8.0" prefHeight="50.0" prefWidth="86.0" text="117" textAlignment="RIGHT" textFill="#dce0e2">
-      					<font>
-      						<Font name="System Bold" size="26.0" />
-      					</font>
-      				</Label>
-			</children>
-		</Group>
-      <ImageView fx:id="mainTitle" fitHeight="196.0" fitWidth="259.0" layoutX="90.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../Assets/Icons/title.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="settingImageView" fitHeight="43.0" fitWidth="36.0" layoutX="14.0" layoutY="16.0" onMouseClicked="#openSettings" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Assets/Icons/volumeOn.png" />
+            <Image url="@../../../Assets/Icons/settings.png" />
          </image>
       </ImageView>
+      <HBox fx:id="bottomBar" layoutX="-1.0" layoutY="553.0" prefHeight="90.0" prefWidth="360.0" style="-fx-background-color: #105fb3;">
+         <children>
+      		<Button fx:id="loadGameButton" mnemonicParsing="false" onMouseClicked="#openLoadGameMenu" prefHeight="40.0" prefWidth="44.0" style="-fx-background-color: transparent;">
+               <graphic>
+            				<ImageView accessibleRole="BUTTON" fitHeight="75.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+            					<image>
+            						<Image url="@../../../Assets/Icons/loadGame.png" />
+            					</image>
+            				</ImageView>
+               </graphic>
+      		</Button>
+      		<Button fx:id="quitGameButton" mnemonicParsing="false" onMouseClicked="#openQuitGameMenu" prefHeight="40.0" prefWidth="44.0" style="-fx-background-color: transparent;">
+               <graphic>
+            				<ImageView accessibleRole="BUTTON" fitHeight="61.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+            					<image>
+            						<Image url="@../../../Assets/Icons/quitGame.png" />
+            					</image>
+            				</ImageView>
+               </graphic>
+      		</Button>
+         </children>
+      </HBox>
+      <Group layoutX="180.0" layoutY="94.0">
+         <children>
+      		<Polygon fx:id="topBar" fill="#105fb3" layoutX="16.0" layoutY="108.0" opacity="0.89" points="164.6441650390625, -150.0, 164.6441650390625, -190.0, -124.09070587158203, -190.0, -108.10645294189453, -172.05125427246094, -124.09070587158203, -150.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Group fx:id="highScore" layoutX="-80.0" layoutY="-82.0">
+               <children>
+      				<ImageView fitHeight="40.0" fitWidth="46.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true">
+      					<image>
+      						<Image url="@../../../Assets/Icons/highScore.png" />
+      					</image>
+      				</ImageView>
+            				<Label fx:id="highScoreCount" contentDisplay="RIGHT" graphicTextGap="25.0" layoutX="34.0" layoutY="-5.0" prefHeight="50.0" prefWidth="156.0" text="117" textAlignment="RIGHT" textFill="#dce0e2">
+            					<font>
+            						<Font name="System Bold" size="26.0" />
+            					</font>
+            				</Label>
+               </children>
+            </Group>
+      		<ImageView fitHeight="30.0" fitWidth="26.0" layoutX="145.0" layoutY="-76.0" pickOnBounds="true" preserveRatio="true">
+      			<image>
+      				<Image url="@../../../Assets/Sprites/Coin.png" />
+      			</image>
+      		</ImageView>
+      		<Label fx:id="coinCountLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" graphicTextGap="25.0" layoutX="49.0" layoutY="-87.0" prefHeight="50.0" prefWidth="86.0" text="4098" textAlignment="RIGHT" textFill="#f8f357">
+      			<font>
+      				<Font name="System Bold" size="26.0" />
+      			</font>
+      		</Label>
+         </children>
+      </Group>
+		<Group fx:id="mainTitle">
+         <children>
+      				<Text fill="WHITE" layoutX="148.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press Space">
+      					<font>
+      						<Font name="System Bold" size="13.0" />
+      					</font>
+      				</Text>
+            <ImageView fitHeight="196.0" fitWidth="259.0" layoutX="95.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Assets/Icons/title.png" />
+               </image>
+            </ImageView>
+         </children>
+		</Group>
 	</children>
 </AnchorPane>

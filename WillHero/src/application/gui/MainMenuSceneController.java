@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import application.controller.GameController;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
@@ -14,6 +15,8 @@ import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,10 +27,12 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Popup;
@@ -38,32 +43,34 @@ import javafx.util.Duration;
 
 public class MainMenuSceneController implements Initializable {
 	
-	//Change this if you want to play with a different key than default that is carriage return.
-	private final String keyToPlayWith = " ";
 	private final Image volumeOn = new Image("file:Assets/Icons/volumeOn.png");
 	private final Image volumeOff = new Image("file:Assets/Icons/volumeOff.png");
 	
-	@FXML
-	private AnchorPane mainPane, cloudsContainerPane;
+	private TranslateTransition titleAnim;
+	private final GameController gameController = new GameController();
+	private boolean gameRunning;
 	
-	private ArrayList<ImageView> clouds;
-	
 	@FXML
-	private Rectangle bottomBar;
+	private HBox bottomBar;
+
+	@FXML
+	private Label coinCountLabel, highScoreCount;
+
+	@FXML
+	private Button loadGameButton, quitGameButton;
+
+	@FXML
+	private Group mainTitle, highScore;
 	
 	@FXML
 	private Polygon topBar;
 	
 	@FXML
-	private Label coinCountLabel, highScoreCount;
-	
+	private AnchorPane mainPane;
+
 	@FXML
-	private Button loadGameButton, quitGameButton;
-	
-	
-	@FXML
-	private ImageView dummyPlayer, loadGameButtonImg, quitGameButtonImg, mainTitle, settingImageView;
-	
+	private ImageView settingImageView;
+
 	private volumeSetting settings;
 	
 	private Popup quitGamePopup, loadGamePopup;
@@ -84,32 +91,76 @@ public class MainMenuSceneController implements Initializable {
 		Window parentWindow = mainPane.getScene().getWindow();
 		quitGamePopup.show(parentWindow,parentWindow.getX(),parentWindow.getY()+29);
 	}
-	
-	@FXML
-	public void startNewGame(KeyEvent event) throws IOException {
-		Stage primaryStage = (Stage)mainPane.getScene().getWindow();
-        Parent root = FXMLLoader.load((getClass().getResource("GameplayScene.fxml")));
-        primaryStage.setScene(new Scene(root));
-		primaryStage.show();
-		
-	}
+
+//	@FXML
+//	public void startNewGame(KeyEvent event) throws IOException {
+////		System.out.println("NEW GAME STARTED");
+//		
+//		if(event.getCharacter().equals(keyToPlayWith)) { 
+//			System.out.println(event.getEventType().getName());
+//			if(gameRunning) {
+//				
+//			}
+//			else {
+//				
+//				gameController.startNewGame();
+//			}
+//			//				primaryStage.setScene(null);
+//			//				primaryStage.show();
+//		}
+//	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		initializeClouds();
-		ParallelTransition parallelTransition = new ParallelTransition();
-		animatePlayer(parallelTransition);
-		animateClouds(parallelTransition);
-		animateTitle(parallelTransition);
-		parallelTransition.play();
+		mainPane.addEventFilter(KeyEvent.KEY_PRESSED, e->{
+			if(e.getCode().equals(KeyCode.SPACE)) {
+				if(!gameRunning) {
+					gameRunning = true;
+					System.out.println("NEW GAME STARsafTED");
+					titleAnim.stop();
+					ParallelTransition parallelTransition = new ParallelTransition();
+
+					titleAnim.setDuration(Duration.millis(800));
+					titleAnim.setByX(-500);
+					titleAnim.setCycleCount(1);
+					titleAnim.setByY(0);
+
+					TranslateTransition bottomTransition = new TranslateTransition(Duration.millis(800), bottomBar);
+					bottomTransition.setByY(500);
+
+					TranslateTransition highScoreTransition = new TranslateTransition(Duration.millis(400), highScore);
+					highScoreTransition.setByY(-250);
+
+					TranslateTransition topTransition = new TranslateTransition(Duration.millis(500), topBar);
+					topTransition.setByX(125);
+
+					parallelTransition.getChildren().addAll(titleAnim,bottomTransition,topTransition,highScoreTransition);
+					parallelTransition.play();	
+				}
+			}
+			
+		});
+		
+		gameController.setStage(mainPane);
+		this.gameRunning = false;
+		bottomBar.setAlignment(Pos.CENTER);
+		bottomBar.setSpacing(100.0);
+		titleAnim = new TranslateTransition(Duration.millis(2000),mainTitle);
+		titleAnim.setCycleCount(Animation.INDEFINITE);
+		titleAnim.setByY(15);
+		titleAnim.setAutoReverse(true);
+		titleAnim.play();
+		
+
+//		Stage primaryStage = (Stage)mainPane.getScene().getWindow();
+//		gameController.startNewGame();
 		
 		settings = new volumeSetting(volumeOn, volumeOff, settingImageView);
 		try {
 			initializeQuitGamePopup();
 			initalizeLoadGamePopup();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -144,54 +195,5 @@ public class MainMenuSceneController implements Initializable {
 			mainPane.setEffect(null);
 		});
 	}
-
-	private void initializeClouds() {
-		clouds = new ArrayList<ImageView>();
-		double[] cloudSizes = {0.15,0.20,0.25,0.20};
-		int[] startingPoints = {
-				0,	-140,
-			  -80,	  40,
-			 -200,	-180,
-			  100,   140
-		};
-		final int cloudCount = 4;
-		for(int i = 1; i <= cloudCount; i++) {
-			ImageView tempCloud = new ImageView("file:Assets/Background/Clouds"+i+".png");
-			tempCloud.setScaleX(cloudSizes[i-1]);
-			tempCloud.setScaleY(cloudSizes[i-1]);
-			tempCloud.relocate(startingPoints[2*(i-1)], startingPoints[2*i-1]);
-			clouds.add(tempCloud);
-		}
-		cloudsContainerPane.getChildren().addAll(clouds);
-	}
-
-	private void animatePlayer(ParallelTransition parallelTransition) {
-		TranslateTransition translateTransition = new TranslateTransition(Duration.millis(600),dummyPlayer);
-		translateTransition.setAutoReverse(true);
-		translateTransition.setCycleCount(Animation.INDEFINITE);
-		translateTransition.setByY(-50);
-		translateTransition.setInterpolator(Interpolator.EASE_OUT);
-		parallelTransition.getChildren().add(translateTransition);
-	}
-	
-	private void animateClouds(ParallelTransition parallelTransition) {
-		for(ImageView cloud: clouds) {
-			TranslateTransition translateTransition = new TranslateTransition(Duration.millis(10000),cloud);
-			translateTransition.setCycleCount(Animation.INDEFINITE);
-			translateTransition.setFromX(360);
-			translateTransition.setToX(-360);
-			translateTransition.setInterpolator(Interpolator.LINEAR);
-			parallelTransition.getChildren().add(translateTransition);
-		}
-	}
-
-	private void animateTitle(ParallelTransition parallelTransition) {
-		TranslateTransition translateTransition = new TranslateTransition(Duration.millis(2000),mainTitle);
-		translateTransition.setCycleCount(Animation.INDEFINITE);
-		translateTransition.setByY(10);
-		translateTransition.setAutoReverse(true);
-		parallelTransition.getChildren().add(translateTransition);
-	}
-
 	
 }

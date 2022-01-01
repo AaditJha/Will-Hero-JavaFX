@@ -3,6 +3,7 @@ package application.view;
 
 import java.io.IOException;
 
+import application.Abyss;
 import application.CustomEvent;
 import application.FallingPlatform;
 import application.Game;
@@ -43,21 +44,14 @@ import javafx.util.Duration;
 
 public class GameView {
 	private ObservableList<WorldObject> worldObjects;
-	private Pane root;
+	private AnchorPane root;
 	
 	public GameView() {
 		worldObjects = FXCollections.observableArrayList();
-		root = new Pane();
-		root.setMaxSize(Main.DIMENSIONS.getWidth(), Main.DIMENSIONS.getHeight());
-		root.setPrefSize(Main.DIMENSIONS.getWidth(),Main.DIMENSIONS.getHeight());
-		root.setMinSize(Main.DIMENSIONS.getWidth(),Main.DIMENSIONS.getHeight());
-		root.setStyle("-fx-background-color:  linear-gradient(from 25% 25% to 100% 100%, #2980B9, #6DD5FA)");
 	}
 
-	public void setStageScene(Stage primaryStage, PlayerController playerController, ObservableList<OrcsController>orcsControllers) throws IOException {
-
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
+	public void setStageScene(AnchorPane rootPane, PlayerController playerController, ObservableList<OrcsController>orcsControllers) throws IOException {
+		this.root = rootPane;
 		LevelGenerator.generate(worldObjects,orcsControllers);
 		for(WorldObject worldObject: worldObjects) {
 			root.getChildren().add(worldObject.getNode());
@@ -83,6 +77,8 @@ public class GameView {
 
 	public void checkCollision(PlayerController playerController, ObservableList<OrcsController>orcsControllers) {
 		Node playerNode = playerController.getView().getNode();
+		if(Abyss.hasFallen(playerNode))System.out.println("MARA");
+		
 		if(playerController.getModel().getHelmet().getEquippedWeapon() instanceof ThrowingKnives) {
 			ThrowingKnives throwingKnives = (ThrowingKnives) playerController.getModel().getHelmet().getEquippedWeapon();
 			for(OrcsController orcsController: orcsControllers) {
@@ -105,7 +101,10 @@ public class GameView {
 
 		for(WorldObject worldObject: worldObjects) {
 			for(OrcsController orcsController: orcsControllers) {
-				if(!worldObject.equals(orcsController.getView()) && !worldObject.equals(playerNode) &&
+				if(Abyss.hasFallen(orcsController.getView().getNode())) {
+					System.out.println("ORC MARA");
+				}
+				if(!worldObject.equals(orcsController.getView()) && !worldObject.equals(playerController.getView()) &&
 						worldObject.getNode().getBoundsInParent().intersects(orcsController.getView().getNode().getBoundsInParent())) {
 						orcsController.getModel().jumpUp();
 //					double orcVelocityX = orcsController.getModel().getVelocity().getX();

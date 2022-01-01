@@ -15,7 +15,7 @@ public class Helmet {
 		return this.playerHelmet;
 	}
 	public Weapon getEquippedWeapon() {
-		return weaponA;
+		return weaponB;
 	}
 	public ThrowingKnives getThrowingKnife() {
 		// TODO Auto-generated method stub

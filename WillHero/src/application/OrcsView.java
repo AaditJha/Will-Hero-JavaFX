@@ -15,10 +15,22 @@ public abstract class OrcsView extends WorldObject {
 	
 	@Override
 	public void playerInteracted(PlayerController playerController) {
-		Point2D playerPos = playerController.getModel().getPosition();
-		Point2D orcPos = new Point2D(getNode().getLayoutX(), getNode().getLayoutY());
-		orcsController.getModel().collide(playerController.getModel());
+		Node playerNode = playerController.getView().getNode();
 		
+
+//		System.out.println(playerNode.getLayoutX()+playerNode.getTranslateX()+" "+(getNode().getLayoutX()+getNode().getTranslateX()));
+		if(getNode().getLayoutX()+getNode().getTranslateX() < playerNode.getLayoutX()+playerNode.getTranslateX()) {
+			System.out.println("MARA");
+		}
+		else {
+			orcsController.getModel().collide(playerController.getModel());
+		}
+		
+//		System.out.println(playerNode.getLayoutY()+playerNode.getTranslateY()+" "+(getNode().getLayoutY()+getNode().getTranslateY()));
+		
+//		if(playerNode.getLayoutY() < getNode().getLayoutY()+getNode().getTranslateY()) {
+//			System.out.println(playerNode.getLayoutX()+" "+(getNode().getLayoutX()+getNode().getTranslateX()));
+//		}
 		
 //		System.out.println(playerPos+" "+orcPos);
 		

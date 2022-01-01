@@ -24,41 +24,27 @@ import javafx.scene.input.KeyEvent;
 public class Main extends Application {
 	public static final Dimension2D DIMENSIONS = new Dimension2D(360, 640);
 	
-	private final GameController gameController;
-	private boolean gameRunning;
-	
-	public Main() {
-		System.out.println("RUNNING");
-		this.gameController = new GameController();
-		this.gameRunning = false;
-	}
-
 	
 	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 
-//			Parent root = FXMLLoader.load(getClass().getResource("gui/GameplayScene.fxml"));
-//			Scene scene = new Scene(root);
-//			primaryStage.setScene(scene);
+			Parent root = FXMLLoader.load(getClass().getResource("gui/MainScene.fxml"));
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
 			primaryStage.setTitle("Will Hero");
 			Image icon = new Image("file:Assets/Icons/main_icon.ico");
 			primaryStage.setResizable(false);
 			primaryStage.getIcons().addAll(icon);
-			gameController.setStage(primaryStage);
 			primaryStage.show();
 			
-			primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-				@Override
-				public void handle(KeyEvent key) {
-					if(key.getCode().equals(KeyCode.SPACE) && !gameRunning) {
-						gameRunning = true;
-						System.out.println("NEW GAME STARTED");
-						gameController.startNewGame();
-					}
-				}
-			});
+//			primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+//				@Override
+//				public void handle(KeyEvent key) {
+
+//				}
+//			});
 //			EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
 //
 //				@Override

@@ -48,6 +48,6 @@ public class ThrowingKnives extends Weapon {
 	}
 
 	public void damageOrc(OrcsController orcsController, int idx) {
-		System.out.println("MARA");
+//		System.out.println("MARA");
 	}
 }

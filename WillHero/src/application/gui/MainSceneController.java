@@ -22,7 +22,7 @@ public class MainSceneController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		final boolean debugging = false;
+		final boolean debugging = true;
 		
 		SequentialTransition sequentialTransition = new SequentialTransition();
 		FadeTransition fadeIn = getFadeTransition(0.0,1.0,(debugging)?100:2000);

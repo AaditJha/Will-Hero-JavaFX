@@ -14,6 +14,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class GameController {
@@ -42,47 +45,43 @@ public class GameController {
 		return PLAYER_POS;
 	}
 	
-	public void setStage(Stage primaryStage) {
+	public void setStage(AnchorPane root) {
 		try {
-			gameView.setStageScene(primaryStage, playerController,orcsControllers);
+			gameView.setStageScene(root, playerController,orcsControllers);
+			GameLoop loop = new GameLoop() {
+				
+				@Override
+				public void tick(float frameDuration) {
+					game.update(frameDuration,spacePressed);
+					gameView.update(playerController,PLAYER_POS,orcsControllers);
+					gameView.checkCollision(playerController,orcsControllers);
+				}
+			};
+			
+			loop.start();
+			
+			root.addEventFilter(KeyEvent.KEY_PRESSED, e->{
+	            if (e.getCode().equals(KeyCode.SPACE)) {
+	            	spacePressed = (true | spacePressed);
+	            }
+	        });
+			
+			root.addEventFilter(KeyEvent.KEY_RELEASED, e->{
+	            if (e.getCode().equals(KeyCode.SPACE)) {
+	            	spacePressed = false;
+	            }
+	        });
+			
+			root.addEventFilter(MouseEvent.MOUSE_CLICKED, e->{
+				if(loop.isActive())loop.pause();
+				if(loop.isPaused())loop.play();
+			});
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public void startNewGame() {
-		
-		playerView.getNode().getScene().setOnKeyPressed((e)->{
-			if(e.getCode().equals(KeyCode.SPACE) && !spacePressed) {
-				spacePressed = true;
-			}
-		});
-		
-		playerView.getNode().getScene().setOnKeyReleased((e)->{
-			if(e.getCode().equals(KeyCode.SPACE) && spacePressed) {
-				spacePressed = false;
-			}
-		});
-		
-		System.out.println("NEW GAME");
-		GameLoop loop = new GameLoop() {
-			
-			@Override
-			public void tick(float frameDuration) {
-				game.update(frameDuration,spacePressed);
-				gameView.update(playerController,PLAYER_POS,orcsControllers);
-			}
-		};
-		GameLoop backgroundLoop = new GameLoop() {
-			
-			@Override
-			public void tick(float frameDuration) {
-				gameView.checkCollision(playerController,orcsControllers);
-			}
-		};
-		loop.start();
-		backgroundLoop.start();
-	}
+
 	
 }
