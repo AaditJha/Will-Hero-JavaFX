@@ -1,20 +1,25 @@
 package application;
 
+import java.io.Serializable;
+
 import application.controller.PlayerController;
 import application.view.GameView;
 import application.view.PlayerView;
+import javafx.beans.property.IntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 
-public class Game {
-	private boolean innerSpaceControl, playerMoving;
+public class Game implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private boolean innerSpaceControl, playerMoving, revived;
 	private PlayerController playerController;
-	private ObservableList<OrcsController> orcsControllers;
+	private transient ObservableList<OrcsController> orcsControllers;
 	
 	public Game(PlayerController playerController, ObservableList<OrcsController> orcsControllers) {
 		this.playerController = playerController;
 		this.playerMoving = false;
 		this.innerSpaceControl = false;
+		this.revived = false;
 		this.orcsControllers = orcsControllers;
 	}
 
@@ -42,6 +47,12 @@ public class Game {
 		}
 	}
 	
-	
+	public boolean isRevived() {
+		return revived;
+	}
+
+	public void setRevived() {
+		revived = true;
+	}
 	
 }

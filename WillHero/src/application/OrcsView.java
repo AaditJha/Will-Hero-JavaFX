@@ -1,6 +1,7 @@
 package application;
 
 import application.controller.PlayerController;
+import javafx.beans.property.IntegerProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 
@@ -20,7 +21,7 @@ public abstract class OrcsView extends WorldObject {
 
 //		System.out.println(playerNode.getLayoutX()+playerNode.getTranslateX()+" "+(getNode().getLayoutX()+getNode().getTranslateX()));
 		if(getNode().getLayoutX()+getNode().getTranslateX() < playerNode.getLayoutX()+playerNode.getTranslateX()) {
-			System.out.println("MARA");
+			if(getNode().getLayoutY()+getNode().getTranslateY() < playerNode.getLayoutY()+playerNode.getTranslateY())playerController.killed(false);
 		}
 		else {
 			orcsController.getModel().collide(playerController.getModel());
@@ -47,6 +48,10 @@ public abstract class OrcsView extends WorldObject {
 		
 	}
 
+	public void deathAnim(IntegerProperty totalCoinsCollected) {
+		return;
+	}
+	
 	public void setController(OrcsController orcsController) {
 		this.orcsController = orcsController;
 	}

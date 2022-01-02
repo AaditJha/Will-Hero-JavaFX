@@ -1,5 +1,7 @@
 package application;
 
+import java.io.Serializable;
+
 import application.controller.PlayerController;
 import javafx.beans.property.IntegerProperty;
 import javafx.collections.ObservableList;
@@ -9,9 +11,9 @@ import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class WorldObject implements Spawnable, Collidable, Animated {
+public class WorldObject implements Spawnable, Collidable, Animated, Serializable {
 	
-	public Node node;
+	public transient Node node;
 	public WorldObject(Point2D boundingBoxCenter, Node node) {
 		this.node = node;
 		node.setLayoutX(boundingBoxCenter.getX());
@@ -42,15 +44,16 @@ public class WorldObject implements Spawnable, Collidable, Animated {
 	}
 
 	@Override
-	public void spawn(ObservableList<WorldObject> spawnables) {
+	public void spawn(ObservableList<WorldObject> spawnables, double viewingOrder) {
 		spawnables.add(this);
+		getNode().setViewOrder(viewingOrder);
 	}
 
 	@Override
 	public void despawn(ObservableList<WorldObject> spawnables) {
 		AnchorPane root = (AnchorPane) node.getParent();
 		spawnables.remove(this);
-		root.getChildren().remove(node);
+		if(root != null)root.getChildren().remove(node);
 	}
 
 	@Override

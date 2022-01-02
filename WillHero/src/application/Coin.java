@@ -33,12 +33,11 @@ public class Coin extends WorldObject {
 		anim.play();
 	}
 
-	public void playerInteracted(PlayerController playerController, IntegerProperty totalCoinsCollected, ObservableList<WorldObject> worldObjects) {
+	public void playerInteracted(PlayerController playerController, IntegerProperty totalCoinsCollected) {
 		if(interacted) return;
 		anim.stop();
 		interacted = true;
 		if(totalCoinsCollected.get() < 9999)totalCoinsCollected.set(totalCoinsCollected.get()+PRICE);
-		despawn(worldObjects);
 	}
 	
 }

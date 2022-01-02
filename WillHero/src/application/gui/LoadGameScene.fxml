@@ -36,15 +36,15 @@
       <Region layoutX="288.0" layoutY="40.0" onMouseClicked="#resumeGame" prefHeight="554.0" prefWidth="20.0" AnchorPane.rightAnchor="0.0" />
       <VBox fx:id="gameSlotsVBox" alignment="TOP_CENTER" layoutX="35.0" layoutY="131.0" prefHeight="366.0" prefWidth="291.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="34.0">
          <children>
-            <Group>
+            <Group fx:id="grp1" onMouseClicked="#highlight">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2980b9" height="84.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" width="275.0" />
-                  <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="206.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                  <Rectangle fx:id="rect1" arcHeight="5.0" arcWidth="5.0" fill="#2980b9" height="84.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" width="275.0" />
+                  <ImageView fx:id="image1" fitHeight="58.0" fitWidth="60.0" layoutX="206.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../Assets/GameSnapshots/demo.png" />
+                        <Image url="@../../../Assets/GameSnapshots/placeholder.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="14.0" layoutY="13.0" text="ABCDEF" textFill="#dce0e2">
+                  <Label layoutX="14.0" layoutY="13.0" text="Slot 1" textFill="#dce0e2">
                      <font>
                         <Font name="System Bold" size="23.0" />
                      </font>
@@ -59,24 +59,24 @@
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Label layoutX="65.0" layoutY="39.0" text="112" textFill="#dce0e2">
+                  <Label fx:id="score1" layoutX="65.0" layoutY="39.0" text="--" textFill="#dce0e2">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
-                  <Label layoutX="65.0" layoutY="55.0" prefHeight="21.0" prefWidth="64.0" text="408" textFill="#dce0e2">
+                  <Label fx:id="coins1" layoutX="65.0" layoutY="55.0" prefHeight="21.0" prefWidth="64.0" text="--" textFill="#dce0e2">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
                </children>
             </Group>
-            <Group>
+            <Group fx:id="grp2" onMouseClicked="#highlight">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2980b9" height="84.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" width="275.0" />
-                  <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="206.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                  <Rectangle fx:id="rect2" arcHeight="5.0" arcWidth="5.0" fill="#2980b9" height="84.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" width="275.0" />
+                  <ImageView fx:id="image2" fitHeight="58.0" fitWidth="60.0" layoutX="206.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../Assets/GameSnapshots/demo.png" />
+                        <Image url="@../../../Assets/GameSnapshots/placeholder.png" />
                      </image>
                   </ImageView>
                   <Label layoutX="14.0" layoutY="13.0" text="Slot 2" textFill="#dce0e2">
@@ -94,27 +94,27 @@
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Label layoutX="65.0" layoutY="39.0" text="80" textFill="#dce0e2">
+                  <Label fx:id="score2" layoutX="65.0" layoutY="39.0" text="--" textFill="#dce0e2">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
-                  <Label layoutX="65.0" layoutY="55.0" prefHeight="21.0" prefWidth="64.0" text="120" textFill="#dce0e2">
+                  <Label fx:id="coins2" layoutX="65.0" layoutY="55.0" prefHeight="21.0" prefWidth="64.0" text="--" textFill="#dce0e2">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
                </children>
             </Group>
-            <Group>
+            <Group fx:id="grp3" onMouseClicked="#highlight">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2980b9" height="84.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" width="275.0" />
-                  <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="206.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                  <Rectangle fx:id="rect3" arcHeight="5.0" arcWidth="5.0" fill="#2980b9" height="84.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" width="275.0" />
+                  <ImageView fx:id="image3" fitHeight="58.0" fitWidth="60.0" layoutX="206.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../Assets/GameSnapshots/placeholder.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="14.0" layoutY="13.0" text="Empty Slot 3" textFill="#dce0e2">
+                  <Label layoutX="14.0" layoutY="13.0" text="Slot 3" textFill="#dce0e2">
                      <font>
                         <Font name="System Bold" size="23.0" />
                      </font>
@@ -129,27 +129,27 @@
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Label layoutX="65.0" layoutY="39.0" text="--" textFill="#dce0e2">
+                  <Label fx:id="score3" layoutX="65.0" layoutY="39.0" text="--" textFill="#dce0e2">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
-                  <Label layoutX="65.0" layoutY="55.0" prefHeight="21.0" prefWidth="64.0" text="--" textFill="#dce0e2">
+                  <Label fx:id="coins3" layoutX="65.0" layoutY="55.0" prefHeight="21.0" prefWidth="64.0" text="--" textFill="#dce0e2">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
                </children>
             </Group>
-            <Group>
+            <Group fx:id="grp4" onMouseClicked="#highlight">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2980b9" height="84.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" width="275.0" />
-                  <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="206.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                  <Rectangle fx:id="rect4" arcHeight="5.0" arcWidth="5.0" fill="#2980b9" height="84.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" width="275.0" />
+                  <ImageView fx:id="image4" fitHeight="58.0" fitWidth="60.0" layoutX="206.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../Assets/GameSnapshots/placeholder.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="14.0" layoutY="13.0" text="Empty Slot 4" textFill="#dce0e2">
+                  <Label layoutX="14.0" layoutY="13.0" text="Slot 4" textFill="#dce0e2">
                      <font>
                         <Font name="System Bold" size="23.0" />
                      </font>
@@ -164,12 +164,12 @@
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Label layoutX="65.0" layoutY="39.0" text="--" textFill="#dce0e2">
+                  <Label fx:id="score4" layoutX="65.0" layoutY="39.0" text="--" textFill="#dce0e2">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
-                  <Label layoutX="65.0" layoutY="55.0" prefHeight="21.0" prefWidth="64.0" text="--" textFill="#dce0e2">
+                  <Label fx:id="coins4" layoutX="65.0" layoutY="55.0" prefHeight="21.0" prefWidth="64.0" text="--" textFill="#dce0e2">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>

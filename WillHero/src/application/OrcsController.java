@@ -1,6 +1,9 @@
 package application;
 
+import java.util.Observable;
+
 import application.view.PlayerView;
+import javafx.collections.ObservableList;
 
 public class OrcsController {
 
@@ -16,5 +19,6 @@ public class OrcsController {
 	
 	public Orcs getModel() { return this.orcs; }
 	public OrcsView getView() { return this.view; }
+
 
 }

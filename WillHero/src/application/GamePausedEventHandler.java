@@ -2,8 +2,8 @@ package application;
 
 import javafx.event.EventHandler;
 
-public abstract class PlayerOutEventHandler implements EventHandler<CustomEvent>{
-	public abstract void onPlayerOutEvent(double translateBy);
+public abstract class GamePausedEventHandler implements EventHandler<CustomEvent>{
+	public abstract void onGamePausedEvent();
 	
 	@Override
 	public void handle(CustomEvent event) {

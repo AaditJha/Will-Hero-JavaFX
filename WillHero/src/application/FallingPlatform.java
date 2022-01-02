@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 import application.controller.PlayerController;
 import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
@@ -15,7 +17,8 @@ public class FallingPlatform extends WorldObject {
 	private static boolean called;
 	private final static Image fallingPlatform = new Image("file:Assets/Background/tile.png");
 	public static final int SIZE = 10;
-	private static FallingPlatform fallingPlatforms[] = new FallingPlatform[10];
+	private static ArrayList<FallingPlatform> fallingPlatforms = new ArrayList<FallingPlatform>();
+	private static int count;
 	
 	private FallingPlatform(Point2D pos) {
 		super(pos,new ImageView(fallingPlatform));
@@ -23,13 +26,25 @@ public class FallingPlatform extends WorldObject {
 		node.setScaleX(0.2);
 		node.setScaleY(0.2);
 		called = false;
+		count = 0;
 	}
 	
-	public static FallingPlatform[] initPlatformRange() {
-		for(int i = 0; i < SIZE; i++) {
-			fallingPlatforms[i] = new FallingPlatform(new Point2D(680 + 40*i, 425));
+	public static ArrayList<ImageView> initStaticPlatform(double X, double Y) {
+		ArrayList<ImageView> ret = new ArrayList<ImageView>();
+		for(int i = 0; i< 5*SIZE; i++) {
+			FallingPlatform temp = new FallingPlatform(new Point2D(X + 40*i, Y));
+			ret.add((ImageView) temp.getNode());
 		}
-		return fallingPlatforms;
+		return ret;
+	}
+	
+	public static FallingPlatform[] initPlatformRange(double X, double Y) {
+		FallingPlatform[] ret = new FallingPlatform[SIZE];
+		for(int i = 0; i < SIZE; i++) {
+			ret[i] = new FallingPlatform(new Point2D(X + 40*i, Y));
+			fallingPlatforms.add(ret[i]);
+		}
+		return ret;
 	}
 	
 	@Override
@@ -40,16 +55,18 @@ public class FallingPlatform extends WorldObject {
 		
 		if(FallingPlatform.called) return;
  		ParallelTransition parallelTransition = new ParallelTransition();
-		for(int i = 0; i < SIZE; i++) {
-			TranslateTransition translateTransition = new TranslateTransition(Duration.millis(1500), fallingPlatforms[i].getNode());
+		for(int i = count*SIZE; i < (count+1)*SIZE; i++) {
+			TranslateTransition translateTransition = new TranslateTransition(Duration.millis(1500), fallingPlatforms.get(i).getNode());
 			translateTransition.setByY(500);
-			translateTransition.setDelay(Duration.millis(400+200*i));
+			translateTransition.setDelay(Duration.millis(200+100*i));
 			parallelTransition.getChildren().add(translateTransition);
 		}
 		parallelTransition.play();
+		count++;
+		System.out.println(count);
 		FallingPlatform.called = true;
 		parallelTransition.setOnFinished((e)->{
-		FallingPlatform.called = false;
+			FallingPlatform.called = false;
 		});
 	}
 	

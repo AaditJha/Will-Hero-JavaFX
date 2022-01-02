@@ -2,6 +2,7 @@ package application.view;
 
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import application.Abyss;
 import application.Chest;
@@ -15,12 +16,14 @@ import application.LevelGenerator;
 import application.Main;
 import application.OrcsController;
 import application.OrcsView;
-import application.PlayerOutEvent;
-import application.PlayerOutEventHandler;
+import application.Platform;
+import application.GamePausedEvent;
+import application.GamePausedEventHandler;
 import application.Spawnable;
 import application.ThrowingKnives;
 import application.Weapon;
 import application.WorldObject;
+import application.controller.GameController;
 import application.controller.PlayerController;
 import javafx.animation.AnimationTimer;
 import javafx.animation.ParallelTransition;
@@ -45,19 +48,21 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class GameView {
-	private boolean innerSpaceControl;
-	private ObservableList<WorldObject> worldObjects;
-	private AnchorPane root;
+public class GameView implements Serializable{
+	private static final long serialVersionUID = 1L;
+	private boolean innerSpaceControl, bossGenerated;
+	private transient ObservableList<WorldObject> worldObjects;
+	private transient AnchorPane root;
 	
 	public GameView() {
 		innerSpaceControl = false;
+		bossGenerated = false;
 		worldObjects = FXCollections.observableArrayList();
 	}
 
 	public void setStageScene(AnchorPane rootPane, PlayerController playerController, ObservableList<OrcsController>orcsControllers) throws IOException {
 		this.root = rootPane;
-		LevelGenerator.generate(worldObjects,orcsControllers);
+		LevelGenerator.getInstance().generate(worldObjects,orcsControllers,rootPane);
 		for(WorldObject worldObject: worldObjects) {
 			root.getChildren().add(worldObject.getNode());
 		}
@@ -67,7 +72,7 @@ public class GameView {
 		playerController.getModel().getHelmet().getLance().setRoot(root);
 	}
 
-	public void update(PlayerController playerController, Point2D PLAYER_POS, ObservableList<OrcsController> orcsControllers) {
+	public void update(PlayerController playerController, Point2D PLAYER_POS, ObservableList<OrcsController> orcsControllers, IntegerProperty playerPosScore) {
 		for(OrcsController orcsController: orcsControllers) {
 			orcsController.getView().relocate(orcsController.getModel().getPosition());
 		}
@@ -75,24 +80,45 @@ public class GameView {
 		Node playerNode = playerController.getView().getNode();
 		Point2D diff = PLAYER_POS.subtract(new Point2D(playerNode.getLayoutX(), playerNode.getLayoutY()));
 		double moveBy = diff.getX();
+		double dist = Math.abs(worldObjects.get(0).getNode().getTranslateX());
+		playerPosScore.set((int) (dist/200));
 		for(WorldObject worldObject: worldObjects) {
 			worldObject.getNode().setTranslateX(moveBy);
+		}
+		if(playerPosScore.get() == 115 && !bossGenerated) {
+			bossGenerated = true;
+			LevelGenerator.getInstance().generateBossOrc(worldObjects, orcsControllers,root);
 		}
 	}
 
 	public void checkCollision(PlayerController playerController, ObservableList<OrcsController>orcsControllers, IntegerProperty totalCoinsCollected, boolean spacePressed) {
 		Node playerNode = playerController.getView().getNode();
-		if(Abyss.hasFallen(playerNode))System.out.println("MARA");
-		
+		if(Abyss.hasFallen(playerNode)) {
+			playerController.killed(true);
+		}
+		ObservableList<OrcsController> orcsToRemove = FXCollections.observableArrayList();
+		for(OrcsController orcsController: orcsControllers) {
+			if(Abyss.hasFallen(orcsController.getView().getNode())) {
+				orcsToRemove.add(orcsController);
+			}
+		}
+		for(OrcsController orcToRemove: orcsToRemove) {
+			orcsControllers.remove(orcToRemove);
+			orcToRemove.getView().despawn(worldObjects);
+			root.getChildren().add(orcToRemove.getView().getNode());
+			orcToRemove.getView().deathAnim(totalCoinsCollected);
+		}
+		orcsToRemove = FXCollections.observableArrayList();
 		if(playerController.getModel().getHelmet().getEquippedWeapon()!= null) {
-			
 			if(playerController.getModel().getHelmet().getEquippedWeapon() instanceof ThrowingKnives) {
 				ThrowingKnives throwingKnives = (ThrowingKnives) playerController.getModel().getHelmet().getEquippedWeapon();
 				for(OrcsController orcsController: orcsControllers) {
 				ObservableList<ImageView> throwingKnivesList = throwingKnives.getList();
 				for(int i = 0; i < throwingKnivesList.size(); i++) {
 					if(orcsController.getView().getNode().getBoundsInParent().intersects(throwingKnivesList.get(i).getBoundsInParent())) {
-						throwingKnives.damageOrc(orcsController,i);
+							if(throwingKnives.damageOrc(orcsController,i)) {
+								orcsToRemove.add(orcsController);
+							}
 						}
 					}
 				}
@@ -103,23 +129,29 @@ public class GameView {
 					if(orcsController.getView().getNode().getBoundsInParent().intersects(lance.getNode().getBoundsInParent())) {
 						if(!innerSpaceControl && spacePressed) {
 							innerSpaceControl = true;
-							lance.damageOrc(orcsController);
+							if(lance.damageOrc(orcsController)){
+								orcsToRemove.add(orcsController);
+							}
 							break;
 						}
 						if(!spacePressed && innerSpaceControl)innerSpaceControl = false;
 					}
 				}
 			}
+			for(OrcsController orcToRemove: orcsToRemove) {
+				orcsControllers.remove(orcToRemove);
+				orcToRemove.getView().despawn(worldObjects);
+				root.getChildren().add(orcToRemove.getView().getNode());
+				orcToRemove.getView().deathAnim(totalCoinsCollected);
+			}
 		}
 
 
 		for(WorldObject worldObject: worldObjects) {
 			for(OrcsController orcsController: orcsControllers) {
-				if(Abyss.hasFallen(orcsController.getView().getNode())) {
-					System.out.println("ORC MARA");
-				}
-				if(!worldObject.equals(orcsController.getView()) && !worldObject.equals(playerController.getView()) &&
-						worldObject.getNode().getBoundsInParent().intersects(orcsController.getView().getNode().getBoundsInParent())) {
+				if(!(worldObject instanceof OrcsView) && !worldObject.equals(orcsController.getView()) && !worldObject.equals(playerController.getView()) &&
+						worldObject.getNode().getBoundsInParent().intersects(orcsController.getView().getNode().getBoundsInParent()) &&
+						!(worldObject instanceof Coin)) {
 						orcsController.getModel().jumpUp();
 //					double orcVelocityX = orcsController.getModel().getVelocity().getX();
 //					if(orcVelocityX == 0)orcsController.getModel().jumpUp();
@@ -127,31 +159,47 @@ public class GameView {
 				}
 			}
 		}
+		
+		ObservableList<WorldObject> coinToRemove = FXCollections.observableArrayList();
 		for(WorldObject worldObject: worldObjects) {
 				if(!worldObject.equals(playerController.getView()) && worldObject.getNode().getBoundsInParent().intersects(playerNode.getBoundsInParent())) {
-					
 					if(worldObject instanceof Chest) {
 						((Chest)worldObject).playerInteracted(playerController,totalCoinsCollected);
 					}
 					else if(worldObject instanceof Coin) {
-						((Coin)worldObject).playerInteracted(playerController, totalCoinsCollected, worldObjects);
+						((Coin)worldObject).playerInteracted(playerController, totalCoinsCollected);
+						coinToRemove.add(worldObject);
 					}
 					else {
 						worldObject.playerInteracted(playerController);
 					}
-//					if(worldObject.isCollidable()) {
-//						double playerVelocityX = playerController.getModel().getVelocity().getX();
-//						if(playerVelocityX == 0)playerController.getModel().jumpUp();
-//						else playerController.getModel().setVelocity(new Point2D(playerVelocityX, 0.0));
-//						
-//						if(worldObject instanceof FallingPlatform) {
-//							worldObject.playerInteracted(playerController);
-//						}
-//					}
-//					else {
-//						worldObject.playerInteracted(playerController);
-//					}
 				}
+		}
+		for(WorldObject coin: coinToRemove) {
+			coin.despawn(worldObjects);
+		}
+	}
+
+	public double findNearestPlatform(PlayerController playerController) {
+		double location = 0, prevLocation = 0;
+		for(WorldObject worldObject: worldObjects) {
+			if(worldObject instanceof Platform) {
+				prevLocation = location;
+				location = worldObject.getNode().getLayoutX() - playerController.getView().getNode().getLayoutX();
+				if(location >= 0.0 && location <= 50.0) {
+					return worldObject.getNode().getLayoutX();
+				}
+			}
+		}
+		return location;
+	}
+
+	public void translateBy(double reviveLocation,PlayerController playerController) {
+		
+		for(WorldObject worldObject: worldObjects) {
+			if(!(worldObject instanceof PlayerView)) {
+				worldObject.getNode().setTranslateX(50);
+			}
 		}
 	}
 }

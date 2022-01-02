@@ -1,5 +1,7 @@
 package application;
 
+import java.io.Serializable;
+
 import application.view.GameView;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -8,12 +10,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
-public class Weapon {
+public class Weapon implements Serializable {
 	private static final int MAX_LEVEL = 3;
 	private int damage;
-	private IntegerProperty upgradeLevel;
-	private Label levelView;
-	private Node node;
+	private transient IntegerProperty upgradeLevel;
+	private transient Label levelView;
+	private transient Node node;
 	
 	public Weapon(Node node) {
 		this.damage = 0;

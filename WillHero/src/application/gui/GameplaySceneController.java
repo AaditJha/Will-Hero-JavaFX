@@ -226,7 +226,6 @@ public class GameplaySceneController implements Initializable {
 			mainPane.setEffect(new GaussianBlur(5.0));
 		});
 		PauseMenuSceneController pauseMenuSceneController = (PauseMenuSceneController) fxmlLoader.getController();
-		pauseMenuSceneController.setPopup(pauseMenuPopup);
 		pauseMenuPopup.onHidingProperty().set((e)->{
 			mainPane.setEffect(null);
 		});

@@ -43,12 +43,12 @@ public class Orcs extends RigidBody {
 		}
 	}
 
-	public void damage(int damage) {
+	public boolean damage(int damage) {
 		health -= damage;
 		if(health <= 0) {
-			System.out.println("KILLED");
 			health = 0;
+			return true;
 		}
-		
+		return false;
 	}
 }

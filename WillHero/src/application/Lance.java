@@ -1,19 +1,22 @@
 package application;
 
+import java.io.Serializable;
+
 import application.controller.GameController;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
+import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-public class Lance extends Weapon {
-	private static final Image lance = new Image("file:Assets/Sprites/Lance.png");
-	private Pane root;
-	private ParallelTransition anim;
+public class Lance extends Weapon  {
+	private transient static final Image lance = new Image("file:Assets/Sprites/Lance.png");
+	private transient Pane root;
+	private transient ParallelTransition anim;
 	
 	public Lance() {
 		super(new ImageView(lance));
@@ -47,8 +50,11 @@ public class Lance extends Weapon {
 		anim.play();
 	}
 	
-	public void damageOrc(OrcsController orcsController) {
-		orcsController.getModel().damage(getDamage());
+	public boolean damageOrc(OrcsController orcsController) {
+		if(orcsController.getModel().damage(getDamage())) {
+			return true;
+		}
+		return false;
 	}
 
 	public void updatePos(Point2D position) {

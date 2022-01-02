@@ -1,11 +1,13 @@
 package application;
 
+import java.io.Serializable;
+
 import javafx.scene.image.Image;
 
-public class Helmet {
+public class Helmet implements Serializable {
 	private enum WeaponStatus {DISABLED, ACTIVE, UNACTIVE};
 	
-	private Image playerHelmet;
+	private transient Image playerHelmet;
 	private Weapon weaponA, weaponB;
 	private WeaponStatus statusA, statusB;
 	
@@ -21,11 +23,8 @@ public class Helmet {
 		return this.playerHelmet;
 	}
 	public Weapon getEquippedWeapon() {
-		if(statusA == WeaponStatus.DISABLED && statusB == WeaponStatus.DISABLED)return null;
-		if(statusA == WeaponStatus.ACTIVE) {
-			weaponA.getNode().setVisible(true);
-			return weaponA;
-		}
+		if(statusA == WeaponStatus.DISABLED && statusB == WeaponStatus.DISABLED) return null;
+		if(statusA == WeaponStatus.ACTIVE) return weaponA;
 		return weaponB;
 	}
 	
@@ -49,8 +48,10 @@ public class Helmet {
 		else if(statusB == WeaponStatus.ACTIVE && statusA == WeaponStatus.UNACTIVE) {
 			statusB = WeaponStatus.UNACTIVE;
 			statusA = WeaponStatus.ACTIVE;
+			weaponA.getNode().setVisible(true);
 		}
 	}
+	
 	public void equipWeapon(boolean isWeaponA) {
 		if(isWeaponA) {
 			weaponA.getNode().setVisible(true);
@@ -71,5 +72,12 @@ public class Helmet {
 		if(activeWeaponA && statusA == WeaponStatus.ACTIVE && statusB == WeaponStatus.UNACTIVE) return true;
 		if(!activeWeaponA && statusB == WeaponStatus.ACTIVE && statusA == WeaponStatus.UNACTIVE) return true;
 		return false;
+	}
+	public void hideWeaponWhileDying() {
+		weaponA.getNode().setVisible(false);
+	}
+	public void unhideWeapon() {
+		if(statusA == WeaponStatus.ACTIVE)weaponA.getNode().setVisible(true);
+		
 	}
 }

@@ -10,5 +10,5 @@ public abstract class CustomEvent extends Event {
 		super(eventType);
 	}
 
-	public abstract void invokeHandler(PlayerOutEventHandler handler);
+	public abstract void invokeHandler(GamePausedEventHandler handler);
 }

@@ -12,10 +12,10 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 public class ThrowingKnives extends Weapon {
-	private static final double range = 250.0;
-	private static final Image knives = new Image("file:Assets/Sprites/ThrowingKnife1.png");
-	private ObservableList<ImageView> thrownKnives;
-	private Pane root;
+	private transient static final double range = 250.0;
+	private transient static final Image knives = new Image("file:Assets/Sprites/ThrowingKnife1.png");
+	private transient ObservableList<ImageView> thrownKnives;
+	private transient Pane root;
 	
 	public ThrowingKnives() {
 		super(new ImageView(knives));
@@ -36,7 +36,8 @@ public class ThrowingKnives extends Weapon {
 		newKnife.setScaleY(0.2);
 		newKnife.relocate(GameController.getPlayerPos().getX(), playerPos.getY()+50);
 		TranslateTransition transition = new TranslateTransition(Duration.millis(1000), newKnife);
-		root.getChildren().add(0,newKnife);
+		root.getChildren().add(newKnife);
+		newKnife.setViewOrder(1.0);
 		transition.setByX(range);
 		transition.play();
 		transition.setOnFinished((e)->{
@@ -49,9 +50,12 @@ public class ThrowingKnives extends Weapon {
 		return thrownKnives;
 	}
 
-	public void damageOrc(OrcsController orcsController, int idx) {
-		orcsController.getModel().damage(getDamage());
+	public boolean damageOrc(OrcsController orcsController, int idx) {
+		if(orcsController.getModel().damage(getDamage())) {
+			return true;
+		}
 		root.getChildren().remove(thrownKnives.get(idx));
 		thrownKnives.remove(idx);
+		return false;
 	}
 }

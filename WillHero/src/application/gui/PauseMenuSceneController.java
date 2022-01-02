@@ -2,6 +2,7 @@ package application.gui;
 
 import java.io.IOException;
 
+import application.GamePausedEvent;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -24,9 +26,16 @@ public class PauseMenuSceneController {
 	private ImageView quitButton;
 	@FXML
 	private ImageView restartButton;
+
+	private Popup quitGamePopup;
+
+	private Popup loadSavePopup;
+
 	
-	public void setPopup(Popup popup) {
+	public void setPopup(Popup popup, Popup quitGamePopup, Popup loadSavePopup) {
 		this.popup = popup;
+		this.quitGamePopup = quitGamePopup;
+		this.loadSavePopup = loadSavePopup;
 	}
 
 	@FXML
@@ -36,12 +45,14 @@ public class PauseMenuSceneController {
 
 	@FXML
 	public void loadSaveGame(MouseEvent event) {
-		System.out.println("LOAD AND SAVE GAME MENU");
+		loadSavePopup.show(popup.getOwnerWindow());
+		popup.hide();
 	}
 
 	@FXML
 	public void quitGame(MouseEvent event) throws IOException {
-		System.out.println("QUIT GAME MENU");
+		quitGamePopup.show(popup.getOwnerWindow());
+		popup.hide();
 	}
 
 	@FXML

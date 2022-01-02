@@ -1,11 +1,13 @@
 package application;
 
+import java.io.Serializable;
+
 import javafx.geometry.Point2D;
 
-public abstract class RigidBody {
-	public static final double GRAVITY = 0.002;
-	private final double mass;
-	private Point2D position, velocity;
+public abstract class RigidBody implements Serializable {
+	public transient static final double GRAVITY = 0.002;
+	private transient final double mass;
+	private transient Point2D position, velocity;
 	
 	public RigidBody(double mass, Point2D position) {
 		this.mass = mass;
@@ -31,6 +33,9 @@ public abstract class RigidBody {
 	
 	public void subtractVeclocity(Point2D vec) {
 		velocity = velocity.subtract(vec);
+	}
+	public void setPosition(Point2D position) {
+		this.position = position;
 	}
 	
 	public void updatePosition() {

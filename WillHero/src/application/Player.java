@@ -1,13 +1,15 @@
 package application;
 
+import java.io.Serializable;
+
 import application.view.GameView;
 import javafx.geometry.Point2D;
 
-public class Player extends RigidBody {
-	private static final double mass = 1.0;
-	private static final double DRAG = -0.005;
-	private static final double THRESHOLD = 0.001;
-	private static final double VERT_JUMP_VEL = -0.5;
+public class Player extends RigidBody implements Serializable{
+	private transient static final double mass = 1.0;
+	private transient static final double DRAG = -0.005;
+	private transient static final double THRESHOLD = 0.001;
+	private transient static final double VERT_JUMP_VEL = -0.5;
 
 	private Helmet helmetWorn;
 	
@@ -52,6 +54,10 @@ public class Player extends RigidBody {
 			return false;
 		}
 		return true;
+	}
+
+	public void setPos(Point2D playerPos) {
+		setPosition(playerPos);
 	}
 	
 }
