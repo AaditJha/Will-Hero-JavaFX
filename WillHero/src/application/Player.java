@@ -1,9 +1,12 @@
 package application;
 
+import java.io.File;
 import java.io.Serializable;
 
 import application.view.GameView;
 import javafx.geometry.Point2D;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class Player extends RigidBody implements Serializable{
 	private transient static final double mass = 1.0;

@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -116,13 +118,28 @@ public class LevelGenerator {
 	
 	
 	public void generateBossOrc(ObservableList<WorldObject> worldObjects, ObservableList<OrcsController> orcsControllers, AnchorPane root) {
-		Point2D temp = new Point2D(200,50);
+		Point2D temp = new Point2D(29*800,50);
 		BossOrc bossOrc = new BossOrc(temp);
 		BossOrcView bossOrcView = new BossOrcView(temp);
 		orcsControllers.add(new OrcsController(bossOrc, bossOrcView));
 		root.getChildren().add(bossOrcView.getNode());
 		bossOrcView.getNode().setViewOrder(1);
 		bossOrcView.spawn(worldObjects, 1);
+	}
+	
+	public void generatePrincess(ObservableList<WorldObject> worldObjects, AnchorPane root) {
+		ImageView princess = new ImageView(new Image("file:Assets/Sprites/Princess_happy.png"));
+		WorldObject worldObject = new WorldObject(new Point2D(30*800+200, 270), princess);
+		princess.setScaleX(0.25);
+		princess.setScaleY(0.25);
+		root.getChildren().add(princess);
+		worldObject.spawn(worldObjects, 1);
+		TranslateTransition translateTransition = new TranslateTransition(Duration.millis(600),princess);
+		translateTransition.setAutoReverse(true);
+		translateTransition.setCycleCount(Animation.INDEFINITE);
+		translateTransition.setByY(-50);
+		translateTransition.setInterpolator(Interpolator.EASE_OUT);
+		translateTransition.play();
 	}
 	
 }

@@ -63,7 +63,6 @@ public class FallingPlatform extends WorldObject {
 		}
 		parallelTransition.play();
 		count++;
-		System.out.println(count);
 		FallingPlatform.called = true;
 		parallelTransition.setOnFinished((e)->{
 			FallingPlatform.called = false;

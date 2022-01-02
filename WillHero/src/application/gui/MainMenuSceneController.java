@@ -187,7 +187,7 @@ public class MainMenuSceneController implements Initializable {
 			weaponA.setVisible(false);
 			weaponB.setVisible(false);
 			gameController.endGame();
-			if (!gameController.getModel().isRevived() && totalCoinCount.get() + gameController.getTotalCoinsCollected().get() >= REVIVAL_COST) {
+			if (gameController.getScore() != 120 && !gameController.getModel().isRevived() && totalCoinCount.get() + gameController.getTotalCoinsCollected().get() >= REVIVAL_COST) {
 				reviveMenu.setVisible(true);
 				ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(2.0), reviveTimeBar);
 				scaleTransition.setToX(0);

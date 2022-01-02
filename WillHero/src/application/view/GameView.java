@@ -10,6 +10,7 @@ import application.Coin;
 import application.CustomEvent;
 import application.FallingPlatform;
 import application.Game;
+import application.GameOverEvent;
 import application.GreenOrcView;
 import application.Lance;
 import application.LevelGenerator;
@@ -50,13 +51,13 @@ import javafx.util.Duration;
 
 public class GameView implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private boolean innerSpaceControl, bossGenerated;
+	private boolean innerSpaceControl, gameOver;
 	private transient ObservableList<WorldObject> worldObjects;
 	private transient AnchorPane root;
 	
 	public GameView() {
 		innerSpaceControl = false;
-		bossGenerated = false;
+		gameOver = false;
 		worldObjects = FXCollections.observableArrayList();
 	}
 
@@ -70,6 +71,8 @@ public class GameView implements Serializable{
 		worldObjects.add(playerController.getView());
 		playerController.getModel().getHelmet().getThrowingKnife().setRoot(root);
 		playerController.getModel().getHelmet().getLance().setRoot(root);
+		LevelGenerator.getInstance().generateBossOrc(worldObjects, orcsControllers, root);
+		LevelGenerator.getInstance().generatePrincess(worldObjects, root);
 	}
 
 	public void update(PlayerController playerController, Point2D PLAYER_POS, ObservableList<OrcsController> orcsControllers, IntegerProperty playerPosScore) {
@@ -85,9 +88,9 @@ public class GameView implements Serializable{
 		for(WorldObject worldObject: worldObjects) {
 			worldObject.getNode().setTranslateX(moveBy);
 		}
-		if(playerPosScore.get() == 115 && !bossGenerated) {
-			bossGenerated = true;
-			LevelGenerator.getInstance().generateBossOrc(worldObjects, orcsControllers,root);
+		if(playerPosScore.get() == 120 && !gameOver) {
+			gameOver = true;
+			playerNode.fireEvent(new GameOverEvent());
 		}
 	}
 
