@@ -36,7 +36,7 @@ public class Player extends RigidBody {
 	}
 	
 	public void move(float frameDuration) {
-		helmetWorn.getEquippedWeapon().useWeapon(getPosition());
+		if(helmetWorn.getEquippedWeapon()!= null)helmetWorn.getEquippedWeapon().useWeapon(getPosition());
 		super.setVelocity(new Point2D(1, 0));
 	}
 

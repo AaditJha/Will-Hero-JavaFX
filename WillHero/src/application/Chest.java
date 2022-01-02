@@ -5,6 +5,7 @@ import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
+import javafx.beans.property.IntegerProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,8 +15,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Chest extends WorldObject {
-	private final static Image chestOpen = new Image("file:Assets/Sprites/WeaponCrateOpen.png");
-	private final static Image chestClose = new Image("file:Assets/Sprites/WeaponCrate.png");
+	protected final static Image chestOpen = new Image("file:Assets/Sprites/WeaponCrateOpen.png");
+	protected final static Image chestClose = new Image("file:Assets/Sprites/WeaponCrate.png");
 	private SequentialTransition sequentialTransition;
 	
 	public Chest(Point2D pos) {
@@ -36,17 +37,21 @@ public class Chest extends WorldObject {
 		translateTransition.setInterpolator(Interpolator.EASE_OUT);
 		return translateTransition; 
 	}
+	
+	public void stopAnim() {
+		sequentialTransition.stop();
+	}
 
 	@Override
 	public boolean isCollidable() {
 		return false;
 	}
-	
-	@Override
-	public void playerInteracted(PlayerController playerController) {
-		ImageView temp = (ImageView) super.getNode();
-		temp.setImage(chestOpen);
-		sequentialTransition.stop();
+
+	public void playerInteracted(PlayerController playerController, IntegerProperty totalCoinsCollected) {
+		// TODO Auto-generated method stub
+		return;
 	}
+	
+
 	
 }

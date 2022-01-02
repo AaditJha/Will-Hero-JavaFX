@@ -1,9 +1,13 @@
 package application;
 
 import application.controller.PlayerController;
+import javafx.beans.property.IntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class WorldObject implements Spawnable, Collidable, Animated {
 	
@@ -44,7 +48,9 @@ public class WorldObject implements Spawnable, Collidable, Animated {
 
 	@Override
 	public void despawn(ObservableList<WorldObject> spawnables) {
+		AnchorPane root = (AnchorPane) node.getParent();
 		spawnables.remove(this);
+		root.getChildren().remove(node);
 	}
 
 	@Override

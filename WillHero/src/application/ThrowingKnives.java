@@ -12,18 +12,20 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 public class ThrowingKnives extends Weapon {
-	private static final double range = 320.0;
+	private static final double range = 250.0;
 	private static final Image knives = new Image("file:Assets/Sprites/ThrowingKnife1.png");
 	private ObservableList<ImageView> thrownKnives;
 	private Pane root;
 	
 	public ThrowingKnives() {
-		super(100,new ImageView(knives));
+		super(new ImageView(knives));
 		thrownKnives = FXCollections.observableArrayList();
 	}
 	
 	public void setRoot(Pane root) {
-		this.root = root;
+		this.root = root;		
+		getLabel().relocate(230, 545);
+		root.getChildren().add(getLabel());
 	}
 	
 	@Override
@@ -48,6 +50,8 @@ public class ThrowingKnives extends Weapon {
 	}
 
 	public void damageOrc(OrcsController orcsController, int idx) {
-//		System.out.println("MARA");
+		orcsController.getModel().damage(getDamage());
+		root.getChildren().remove(thrownKnives.get(idx));
+		thrownKnives.remove(idx);
 	}
 }

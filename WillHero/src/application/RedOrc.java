@@ -7,6 +7,6 @@ public class RedOrc extends Orcs {
 	
 	
 	public RedOrc(Point2D pos) {
-		super(mass, pos, 100);
+		super(mass, pos, 100, 300);
 	}
 }

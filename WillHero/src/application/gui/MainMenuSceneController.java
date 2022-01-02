@@ -60,7 +60,7 @@ public class MainMenuSceneController implements Initializable {
 	private Button loadGameButton, quitGameButton;
 
 	@FXML
-	private Group mainTitle, highScore;
+	private Group mainTitle, highScore, weaponA, weaponB;
 	
 	@FXML
 	private Polygon topBar;
@@ -74,6 +74,16 @@ public class MainMenuSceneController implements Initializable {
 	private volumeSetting settings;
 	
 	private Popup quitGamePopup, loadGamePopup;
+	
+	@FXML
+    void swapWeapon(MouseEvent event) {
+    	if(gameController.bothWeaponUnlocked(true) && weaponB == event.getSource()) {
+    		gameController.swapWeapon();
+    	}
+    	else if(gameController.bothWeaponUnlocked(false) && weaponA == event.getSource()) {
+    		gameController.swapWeapon();
+    	}
+    }
 	
 	@FXML
 	public void openSettings(MouseEvent event) {
@@ -112,12 +122,15 @@ public class MainMenuSceneController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		weaponA.setVisible(false);
+		weaponB.setVisible(false);
 		
 		mainPane.addEventFilter(KeyEvent.KEY_PRESSED, e->{
 			if(e.getCode().equals(KeyCode.SPACE)) {
 				if(!gameRunning) {
 					gameRunning = true;
 					System.out.println("NEW GAME STARsafTED");
+					coinCountLabel.textProperty().bind(gameController.getTotalCoinsCollected());
 					titleAnim.stop();
 					ParallelTransition parallelTransition = new ParallelTransition();
 
@@ -126,10 +139,10 @@ public class MainMenuSceneController implements Initializable {
 					titleAnim.setCycleCount(1);
 					titleAnim.setByY(0);
 
-					TranslateTransition bottomTransition = new TranslateTransition(Duration.millis(800), bottomBar);
+					TranslateTransition bottomTransition = new TranslateTransition(Duration.millis(500), bottomBar);
 					bottomTransition.setByY(500);
 
-					TranslateTransition highScoreTransition = new TranslateTransition(Duration.millis(400), highScore);
+					TranslateTransition highScoreTransition = new TranslateTransition(Duration.millis(500), highScore);
 					highScoreTransition.setByY(-250);
 
 					TranslateTransition topTransition = new TranslateTransition(Duration.millis(500), topBar);
@@ -137,6 +150,11 @@ public class MainMenuSceneController implements Initializable {
 
 					parallelTransition.getChildren().addAll(titleAnim,bottomTransition,topTransition,highScoreTransition);
 					parallelTransition.play();	
+					parallelTransition.setOnFinished(e2->{
+						weaponA.setVisible(true);
+						weaponB.setVisible(true);
+						gameController.setWeaponLevelVisible();
+					});
 				}
 			}
 			

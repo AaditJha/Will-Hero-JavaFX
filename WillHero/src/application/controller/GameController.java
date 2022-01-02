@@ -1,6 +1,7 @@
 package application.controller;
 
 import java.io.IOException;
+import java.util.Observable;
 
 import application.Game;
 import application.GameLoop;
@@ -10,6 +11,10 @@ import application.OrcsController;
 import application.Player;
 import application.view.GameView;
 import application.view.PlayerView;
+import javafx.beans.binding.StringBinding;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableIntegerValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
@@ -24,6 +29,7 @@ public class GameController {
 	private GameView gameView;
 	private Game game;
 
+	private IntegerProperty totalCoinsCollected;
 	private Player player;
 	private PlayerView playerView;
 	private PlayerController playerController;
@@ -32,6 +38,7 @@ public class GameController {
 	private boolean spacePressed;
 	
 	public GameController() {
+		totalCoinsCollected = new SimpleIntegerProperty(0);
 		orcsControllers = FXCollections.observableArrayList();
 		player = new Player(PLAYER_POS);
 		playerView = new PlayerView(PLAYER_POS,player.getHelmet().getPlayerHelmetIMG());
@@ -45,6 +52,14 @@ public class GameController {
 		return PLAYER_POS;
 	}
 	
+	public StringBinding getTotalCoinsCollected() {
+		return this.totalCoinsCollected.asString();
+	}
+	
+//	public boolean isWeaponASelected() {
+//		return player.getHelmet().isSelectedWeaponA();
+//	}
+	
 	public void setStage(AnchorPane root) {
 		try {
 			gameView.setStageScene(root, playerController,orcsControllers);
@@ -54,7 +69,7 @@ public class GameController {
 				public void tick(float frameDuration) {
 					game.update(frameDuration,spacePressed);
 					gameView.update(playerController,PLAYER_POS,orcsControllers);
-					gameView.checkCollision(playerController,orcsControllers);
+					gameView.checkCollision(playerController,orcsControllers,totalCoinsCollected,spacePressed);
 				}
 			};
 			
@@ -72,15 +87,28 @@ public class GameController {
 	            }
 	        });
 			
-			root.addEventFilter(MouseEvent.MOUSE_CLICKED, e->{
-				if(loop.isActive())loop.pause();
-				if(loop.isPaused())loop.play();
-			});
+//			root.addEventFilter(MouseEvent.MOUSE_CLICKED, e->{
+//				if(loop.isActive())loop.pause();
+//				if(loop.isPaused())loop.play();
+//			});
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void swapWeapon() {
+		player.getHelmet().swapWeapon();
+	}
+
+	public boolean bothWeaponUnlocked(boolean activeWeaponA) {
+		return player.getHelmet().bothWeaponUnlocked(activeWeaponA);
+	}
+
+	public void setWeaponLevelVisible() {
+		player.getHelmet().getThrowingKnife().getLabel().setVisible(true);
+		player.getHelmet().getLance().getLabel().setVisible(true);
 	}
 
 	

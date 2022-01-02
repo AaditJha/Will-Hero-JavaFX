@@ -9,12 +9,14 @@ public class Orcs extends RigidBody {
 	private static final double VERT_JUMP_VEL2 = -0.6;
 	private final int COINS_GIVEN;
 	private int jumpCount;
+	private int health;
 	
-	public Orcs(double mass, Point2D pos, int coins) {
+	public Orcs(double mass, Point2D pos, int coins, int health) {
 		super(mass, pos);
 		this.COINS_GIVEN = coins;
 		super.setVelocity(new Point2D(0, VERT_JUMP_VEL));
 		jumpCount = 0;
+		this.health = health;
 	}
 	
 	public void jump(float frameDuration) {
@@ -39,5 +41,14 @@ public class Orcs extends RigidBody {
 		if(super.getVelocity().getX() < THRESHOLD) {
 			super.setVelocity(new Point2D(0, 0));
 		}
+	}
+
+	public void damage(int damage) {
+		health -= damage;
+		if(health <= 0) {
+			System.out.println("KILLED");
+			health = 0;
+		}
+		
 	}
 }

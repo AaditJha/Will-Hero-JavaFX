@@ -16,7 +16,7 @@ public class Lance extends Weapon {
 	private ParallelTransition anim;
 	
 	public Lance() {
-		super(100,new ImageView(lance));
+		super(new ImageView(lance));
 		getNode().setRotate(-5.0);
 		getNode().setScaleX(0.3);
 		getNode().setScaleY(0.3);
@@ -38,6 +38,8 @@ public class Lance extends Weapon {
 		this.root = root;
 		root.getChildren().add(getNode());;
 		getNode().relocate(GameController.getPlayerPos().getX()-80, GameController.getPlayerPos().getY()+50);
+		getLabel().relocate(85, 545);
+		root.getChildren().add(getLabel());
 	}
 
 	@Override
@@ -46,7 +48,7 @@ public class Lance extends Weapon {
 	}
 	
 	public void damageOrc(OrcsController orcsController) {
-		System.out.println("KILL");
+		orcsController.getModel().damage(getDamage());
 	}
 
 	public void updatePos(Point2D position) {

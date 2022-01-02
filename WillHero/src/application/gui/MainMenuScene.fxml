@@ -83,5 +83,33 @@
             </ImageView>
          </children>
 		</Group>
+      <Group fx:id="weaponA" layoutX="84.0" layoutY="543.0" onMouseClicked="#swapWeapon">
+         <children>
+            <ImageView fitHeight="71.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Assets/Icons/weaponUI.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="14.0" layoutX="25.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Assets/Sprites/Sword.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group fx:id="weaponB" layoutX="230.0" layoutY="543.0" onMouseClicked="#swapWeapon">
+         <children>
+            <ImageView fitHeight="71.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Assets/Icons/weaponUI.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="49.0" fitWidth="11.0" layoutX="25.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Assets/Sprites/ThrowingKnife2.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
 	</children>
 </AnchorPane>

@@ -4,6 +4,8 @@ package application.view;
 import java.io.IOException;
 
 import application.Abyss;
+import application.Chest;
+import application.Coin;
 import application.CustomEvent;
 import application.FallingPlatform;
 import application.Game;
@@ -24,6 +26,7 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.beans.property.IntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -43,10 +46,12 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class GameView {
+	private boolean innerSpaceControl;
 	private ObservableList<WorldObject> worldObjects;
 	private AnchorPane root;
 	
 	public GameView() {
+		innerSpaceControl = false;
 		worldObjects = FXCollections.observableArrayList();
 	}
 
@@ -75,29 +80,38 @@ public class GameView {
 		}
 	}
 
-	public void checkCollision(PlayerController playerController, ObservableList<OrcsController>orcsControllers) {
+	public void checkCollision(PlayerController playerController, ObservableList<OrcsController>orcsControllers, IntegerProperty totalCoinsCollected, boolean spacePressed) {
 		Node playerNode = playerController.getView().getNode();
 		if(Abyss.hasFallen(playerNode))System.out.println("MARA");
 		
-		if(playerController.getModel().getHelmet().getEquippedWeapon() instanceof ThrowingKnives) {
-			ThrowingKnives throwingKnives = (ThrowingKnives) playerController.getModel().getHelmet().getEquippedWeapon();
-			for(OrcsController orcsController: orcsControllers) {
-			ObservableList<ImageView> throwingKnivesList = throwingKnives.getList();
-			for(int i = 0; i < throwingKnivesList.size(); i++) {
-				if(orcsController.getView().getNode().getBoundsInParent().intersects(throwingKnivesList.get(i).getBoundsInParent())) {
-					throwingKnives.damageOrc(orcsController,i);
+		if(playerController.getModel().getHelmet().getEquippedWeapon()!= null) {
+			
+			if(playerController.getModel().getHelmet().getEquippedWeapon() instanceof ThrowingKnives) {
+				ThrowingKnives throwingKnives = (ThrowingKnives) playerController.getModel().getHelmet().getEquippedWeapon();
+				for(OrcsController orcsController: orcsControllers) {
+				ObservableList<ImageView> throwingKnivesList = throwingKnives.getList();
+				for(int i = 0; i < throwingKnivesList.size(); i++) {
+					if(orcsController.getView().getNode().getBoundsInParent().intersects(throwingKnivesList.get(i).getBoundsInParent())) {
+						throwingKnives.damageOrc(orcsController,i);
+						}
+					}
+				}
+			}
+			else {
+				Lance lance = (Lance) playerController.getModel().getHelmet().getEquippedWeapon();
+				for(OrcsController orcsController: orcsControllers) {
+					if(orcsController.getView().getNode().getBoundsInParent().intersects(lance.getNode().getBoundsInParent())) {
+						if(!innerSpaceControl && spacePressed) {
+							innerSpaceControl = true;
+							lance.damageOrc(orcsController);
+							break;
+						}
+						if(!spacePressed && innerSpaceControl)innerSpaceControl = false;
 					}
 				}
 			}
 		}
-		else {
-			Lance lance = (Lance) playerController.getModel().getHelmet().getEquippedWeapon();
-			for(OrcsController orcsController: orcsControllers) {
-				if(orcsController.getView().getNode().getBoundsInParent().intersects(lance.getNode().getBoundsInParent())) {
-					lance.damageOrc(orcsController);
-				}
-			}
-		}
+
 
 		for(WorldObject worldObject: worldObjects) {
 			for(OrcsController orcsController: orcsControllers) {
@@ -115,7 +129,16 @@ public class GameView {
 		}
 		for(WorldObject worldObject: worldObjects) {
 				if(!worldObject.equals(playerController.getView()) && worldObject.getNode().getBoundsInParent().intersects(playerNode.getBoundsInParent())) {
-					worldObject.playerInteracted(playerController);
+					
+					if(worldObject instanceof Chest) {
+						((Chest)worldObject).playerInteracted(playerController,totalCoinsCollected);
+					}
+					else if(worldObject instanceof Coin) {
+						((Coin)worldObject).playerInteracted(playerController, totalCoinsCollected, worldObjects);
+					}
+					else {
+						worldObject.playerInteracted(playerController);
+					}
 //					if(worldObject.isCollidable()) {
 //						double playerVelocityX = playerController.getModel().getVelocity().getX();
 //						if(playerVelocityX == 0)playerController.getModel().jumpUp();
