@@ -36,7 +36,7 @@ public class LevelGenerator {
 
 	public void generate(ObservableList<WorldObject> worldObjects, ObservableList<OrcsController> orcsControllers, AnchorPane rootPane) {		
 		for(int i = 0; i < 28; i++) {
-			if(i == 15 || i == 20 || i == 24) {
+			if(i == 15) {
 				FallingPlatform[] fallingPlatforms = FallingPlatform.initPlatformRange(i*800+320, 335);
 				for(FallingPlatform fallingPlatform:fallingPlatforms) {
 					fallingPlatform.spawn(worldObjects,1);

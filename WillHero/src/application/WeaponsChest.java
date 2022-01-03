@@ -14,6 +14,7 @@ import javafx.scene.media.MediaPlayer;
 public class WeaponsChest extends Chest {
 	private boolean interacted;
 	private boolean chestRandomizer;
+	private Media chestOpenAudio = new Media(new File("src/application/sounds/chestopen.wav").toURI().toString());
 	public WeaponsChest(Point2D pos, int chestRandomizer) {
 		super(pos);
 		interacted = false;
@@ -24,6 +25,11 @@ public class WeaponsChest extends Chest {
 	public void playerInteracted(PlayerController playerController, IntegerProperty totalCoinsCollected) {
 		if(interacted) return;
 		interacted = true;
+		if(!GameController.muted) {
+			MediaPlayer mediaPlayer = new MediaPlayer(chestOpenAudio);
+			mediaPlayer.setVolume(0.5);
+			mediaPlayer.play();
+		}
 		if(totalCoinsCollected.get() < 9999)totalCoinsCollected.set(totalCoinsCollected.get()+5);
 		ImageView temp = (ImageView) super.getNode();
 		temp.setImage(chestOpen);

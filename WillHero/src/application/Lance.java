@@ -1,5 +1,6 @@
 package application;
 
+import java.io.File;
 import java.io.Serializable;
 
 import application.controller.GameController;
@@ -11,12 +12,16 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class Lance extends Weapon  {
 	private transient static final Image lance = new Image("file:Assets/Sprites/Lance.png");
 	private transient Pane root;
 	private transient ParallelTransition anim;
+	private transient Media media = new Media(new File("src/application/sounds/killbysword.wav").toURI().toString());
+	private transient MediaPlayer mediaplayer = new MediaPlayer(media);
 	
 	public Lance() {
 		super(new ImageView(lance));
@@ -47,6 +52,10 @@ public class Lance extends Weapon  {
 
 	@Override
 	public void useWeapon(Point2D playerPos) {
+		if(!GameController.muted) {
+			mediaplayer.setVolume(0.5);
+			mediaplayer.play();
+		}
 		anim.play();
 	}
 	

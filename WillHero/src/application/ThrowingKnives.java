@@ -1,5 +1,7 @@
 package application;
 
+import java.io.File;
+
 import application.controller.GameController;
 import application.view.GameView;
 import javafx.animation.TranslateTransition;
@@ -9,6 +11,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class ThrowingKnives extends Weapon {
@@ -16,6 +20,8 @@ public class ThrowingKnives extends Weapon {
 	private transient static final Image knives = new Image("file:Assets/Sprites/ThrowingKnife1.png");
 	private transient ObservableList<ImageView> thrownKnives;
 	private transient Pane root;
+	private transient Media media = new Media(new File("src/application/sounds/knivesout.wav").toURI().toString());
+	private transient MediaPlayer mediaplayer = new MediaPlayer(media);
 	
 	public ThrowingKnives() {
 		super(new ImageView(knives));
@@ -30,6 +36,10 @@ public class ThrowingKnives extends Weapon {
 	
 	@Override
 	public void useWeapon(Point2D playerPos) {
+		if(!GameController.muted) {
+			mediaplayer.setVolume(0.5);
+			mediaplayer.play();
+		}
 		ImageView newKnife = new ImageView(knives);
 		thrownKnives.add(newKnife);
 		newKnife.setScaleX(0.2);

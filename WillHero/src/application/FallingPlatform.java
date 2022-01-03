@@ -18,7 +18,6 @@ public class FallingPlatform extends WorldObject {
 	private final static Image fallingPlatform = new Image("file:Assets/Background/tile.png");
 	public static final int SIZE = 10;
 	private static ArrayList<FallingPlatform> fallingPlatforms = new ArrayList<FallingPlatform>();
-	private static int count;
 	
 	private FallingPlatform(Point2D pos) {
 		super(pos,new ImageView(fallingPlatform));
@@ -26,7 +25,6 @@ public class FallingPlatform extends WorldObject {
 		node.setScaleX(0.2);
 		node.setScaleY(0.2);
 		called = false;
-		count = 0;
 	}
 	
 	public static ArrayList<ImageView> initStaticPlatform(double X, double Y) {
@@ -49,20 +47,18 @@ public class FallingPlatform extends WorldObject {
 	
 	@Override
 	public void playerInteracted(PlayerController playerController) {
+		if(called)return;
 		double playerVelocityX = playerController.getModel().getVelocity().getX();
 		if(playerVelocityX == 0)playerController.getModel().jumpUp();
 		else playerController.getModel().setVelocity(new Point2D(playerVelocityX, 0.0));
-		
-		if(FallingPlatform.called) return;
  		ParallelTransition parallelTransition = new ParallelTransition();
-		for(int i = count*SIZE; i < (count+1)*SIZE; i++) {
+		for(int i = 0; i < fallingPlatforms.size(); i++) {
 			TranslateTransition translateTransition = new TranslateTransition(Duration.millis(1500), fallingPlatforms.get(i).getNode());
 			translateTransition.setByY(500);
 			translateTransition.setDelay(Duration.millis(200+100*i));
 			parallelTransition.getChildren().add(translateTransition);
 		}
 		parallelTransition.play();
-		count++;
 		FallingPlatform.called = true;
 		parallelTransition.setOnFinished((e)->{
 			FallingPlatform.called = false;

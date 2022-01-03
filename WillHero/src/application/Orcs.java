@@ -1,6 +1,11 @@
 package application;
 
+import java.io.File;
+
+import application.controller.GameController;
 import javafx.geometry.Point2D;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class Orcs extends RigidBody {
 	private static final double DRAG = -0.005;
@@ -10,6 +15,8 @@ public class Orcs extends RigidBody {
 	private final int COINS_GIVEN;
 	private int jumpCount;
 	private int health;
+	private transient Media media = new Media(new File("src/application/sounds/orckilledbysword.wav").toURI().toString());
+	private transient MediaPlayer mediaplayer = new MediaPlayer(media);
 	
 	public Orcs(double mass, Point2D pos, int coins, int health) {
 		super(mass, pos);
@@ -47,6 +54,10 @@ public class Orcs extends RigidBody {
 		health -= damage;
 		if(health <= 0) {
 			health = 0;
+			if(!GameController.muted) {
+				mediaplayer.setVolume(0.5);
+				mediaplayer.play();
+			}
 			return true;
 		}
 		return false;

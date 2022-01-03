@@ -1,5 +1,6 @@
 package application.gui;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -51,6 +52,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -76,6 +79,8 @@ public class MainMenuSceneController implements Initializable {
 	private Popup pauseMenuPopup;
 	public static ArrayList<GameController> savedGameList;
 	private boolean boostGiven;
+	private Media music = new Media(new File("src/application/sounds/music.wav").toURI().toString());
+	private MediaPlayer mediaPlayer;
 	@FXML
 	private transient Rectangle reviveTimeBar; 
 
@@ -145,6 +150,12 @@ public class MainMenuSceneController implements Initializable {
 	public void openSettings(MouseEvent event) {
 		settings.swapState();
 		GameController.muted = !settings.isSelected();
+		if(gameController.muted) {
+			mediaPlayer.pause();
+		}
+		else {
+			mediaPlayer.play();
+		}
 	}
 
 	@FXML
@@ -182,6 +193,10 @@ public class MainMenuSceneController implements Initializable {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		mediaPlayer = new MediaPlayer(music);
+		mediaPlayer.setVolume(0.1);
+		mediaPlayer.setCycleCount(Animation.INDEFINITE);
+		mediaPlayer.play();
 		savedGameList = new ArrayList<>();
 		for(int i = 0; i < 4; i++)savedGameList.add(null);
 		boostGiven = false;
@@ -291,6 +306,7 @@ public class MainMenuSceneController implements Initializable {
 	}
 
 	private void restartGame() {
+		mediaPlayer.stop();
 		restartPrompted = false;
 		gameRunning = false;
 		loadGameSceneController.setRunning(gameRunning);
