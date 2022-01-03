@@ -159,12 +159,13 @@ public class LoadGameSceneController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		selectedSlot = 1;
     	rect1.setStyle(highlighted);
-    	for(GameController controller: controller.savedGameList) {
-    		if(controller!=null) {
-    			updateGUI(new Pair<Integer, Integer>(controller.getSerializableScore(), controller.getCoins()));
-    		}
+    	if(controller.savedGameList != null) {
+        	for(GameController controller: controller.savedGameList) {
+        		if(controller!=null) {
+        			updateGUI(new Pair<Integer, Integer>(controller.getSerializableScore(), controller.getCoins()));
+        		}
+        	}
     	}
-    	
 	}
 
 }

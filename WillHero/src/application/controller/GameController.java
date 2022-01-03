@@ -99,11 +99,20 @@ public class GameController implements Serializable {
 				
 				@Override
 				public void tick(float frameDuration) {
-					game.update(frameDuration,spacePressed);
-					gameView.update(playerController,PLAYER_POS,orcsControllers,playerPosScore);
-					gameView.checkCollision(playerController,orcsControllers,totalCoinsCollected,spacePressed);
-					serializablePosScore = playerPosScore.get();
-					serializableTotalCoins = totalCoinsCollected.get();
+					if(playerController.invincible) {
+						game.update(frameDuration,true);
+						gameView.update(playerController,PLAYER_POS,orcsControllers,playerPosScore);
+						gameView.checkCollision(playerController,orcsControllers,totalCoinsCollected,true);
+						serializablePosScore = playerPosScore.get();
+						serializableTotalCoins = totalCoinsCollected.get();
+					}
+					else {
+						game.update(frameDuration,spacePressed);
+						gameView.update(playerController,PLAYER_POS,orcsControllers,playerPosScore);
+						gameView.checkCollision(playerController,orcsControllers,totalCoinsCollected,spacePressed);
+						serializablePosScore = playerPosScore.get();
+						serializableTotalCoins = totalCoinsCollected.get();
+					}
 				}
 			};
 			
@@ -176,6 +185,10 @@ public class GameController implements Serializable {
 		player.setPos(PLAYER_POS);
 		root.fireEvent(new GamePausedEvent());
 		player.getHelmet().unhideWeapon();
+	}
+
+	public void setInvincible(boolean status) {
+		playerController.invincible = status;
 	}
 
 	

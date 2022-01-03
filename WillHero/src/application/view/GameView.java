@@ -163,23 +163,25 @@ public class GameView implements Serializable{
 			}
 		}
 		
-		ObservableList<WorldObject> coinToRemove = FXCollections.observableArrayList();
-		for(WorldObject worldObject: worldObjects) {
-				if(!worldObject.equals(playerController.getView()) && worldObject.getNode().getBoundsInParent().intersects(playerNode.getBoundsInParent())) {
-					if(worldObject instanceof Chest) {
-						((Chest)worldObject).playerInteracted(playerController,totalCoinsCollected);
+		if(!playerController.invincible) {
+			ObservableList<WorldObject> coinToRemove = FXCollections.observableArrayList();
+			for(WorldObject worldObject: worldObjects) {
+					if(!worldObject.equals(playerController.getView()) && worldObject.getNode().getBoundsInParent().intersects(playerNode.getBoundsInParent())) {
+						if(worldObject instanceof Chest) {
+							((Chest)worldObject).playerInteracted(playerController,totalCoinsCollected);
+						}
+						else if(worldObject instanceof Coin) {
+							((Coin)worldObject).playerInteracted(playerController, totalCoinsCollected);
+							coinToRemove.add(worldObject);
+						}
+						else {
+							worldObject.playerInteracted(playerController);
+						}
 					}
-					else if(worldObject instanceof Coin) {
-						((Coin)worldObject).playerInteracted(playerController, totalCoinsCollected);
-						coinToRemove.add(worldObject);
-					}
-					else {
-						worldObject.playerInteracted(playerController);
-					}
-				}
-		}
-		for(WorldObject coin: coinToRemove) {
-			coin.despawn(worldObjects);
+			}
+			for(WorldObject coin: coinToRemove) {
+				coin.despawn(worldObjects);
+			}
 		}
 	}
 

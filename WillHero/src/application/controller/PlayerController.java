@@ -10,10 +10,12 @@ import javafx.geometry.Point2D;
 public class PlayerController implements Serializable {
 	private Player player;
 	private PlayerView view;
+	public transient boolean invincible;
 	
 	public PlayerController(Player player, PlayerView view) {
 		this.player = player;
 		this.view = view;
+		invincible = false;
 	}
 	
 	public Player getModel() { return this.player; }

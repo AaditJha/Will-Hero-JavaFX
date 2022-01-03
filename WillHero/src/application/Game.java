@@ -32,10 +32,10 @@ public class Game implements Serializable {
 		}
 		playerController.getModel().jump(frameDuration);
 		if(playerMoving) {
-			playerMoving = playerController.getModel().addDrag();
+			if(!playerController.invincible)playerMoving = playerController.getModel().addDrag();
 			if(!playerMoving) playerController.getView().unsquish();
 		}
-		if(spacePressed && !innerSpaceControl) {
+		if(spacePressed && (!innerSpaceControl ||playerController.invincible)) {
 			playerController.getModel().move(frameDuration);
 			playerController.getView().squish();
 			playerMoving = true;

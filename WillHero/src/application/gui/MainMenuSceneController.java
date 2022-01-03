@@ -17,6 +17,8 @@ import application.GamePausedEvent;
 import application.GlobalData;
 import application.controller.GameController;
 import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
@@ -73,6 +75,7 @@ public class MainMenuSceneController implements Initializable {
 	private LoadGameSceneController loadGameSceneController;
 	private Popup pauseMenuPopup;
 	public static ArrayList<GameController> savedGameList;
+	private boolean boostGiven;
 	@FXML
 	private transient Rectangle reviveTimeBar; 
 
@@ -86,7 +89,7 @@ public class MainMenuSceneController implements Initializable {
 	private transient Button loadGameButton, quitGameButton;
 
 	@FXML
-	private transient Group mainTitle, highScore, weaponA, weaponB, endGameProgressBar, reviveMenu;
+	private transient Group mainTitle, highScore, weaponA, weaponB, endGameProgressBar, reviveMenu, boost;
 	
 	@FXML
 	private transient Group yesRevive, noRevive;
@@ -121,6 +124,22 @@ public class MainMenuSceneController implements Initializable {
 			gameController.swapWeapon();
 		}
 	}
+	
+	@FXML
+	void giveBoost(MouseEvent event) {
+		if(boostGiven)return;
+		boostGiven = true;
+		totalCoinCount.set(totalCoinCount.get()-500);
+		gameController.setInvincible(true);
+		FadeTransition ft = new FadeTransition(Duration.millis(5000), boost);
+		ft.setToValue(0);
+		ft.play();
+		ft.setOnFinished(e->{
+			boost.setOpacity(1);
+			boost.setVisible(false);
+			gameController.setInvincible(false);
+		});
+	}
 
 	@FXML
 	public void openSettings(MouseEvent event) {
@@ -142,12 +161,12 @@ public class MainMenuSceneController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		try {
-			deserializeGame(-1);
-		} catch (ClassNotFoundException | IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		try {
+//			deserializeGame(-1);
+//		} catch (ClassNotFoundException | IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		try {
 			initializeQuitGamePopup();
 			initalizeLoadGamePopup();
@@ -163,11 +182,15 @@ public class MainMenuSceneController implements Initializable {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		savedGameList = new ArrayList<>();
+		for(int i = 0; i < 4; i++)savedGameList.add(null);
+		boostGiven = false;
 		gameController = new GameController();
 		highscoreInt = new SimpleIntegerProperty(globalData.getHighScore());
 		totalCoinCount = new SimpleIntegerProperty(globalData.getTotalCoinCount());
 		coinCountLabel.textProperty().bind(totalCoinCount.asString());
 		highScoreCount.textProperty().bind(highscoreInt.asString());
+		boost.setVisible(false);
 		weaponA.setVisible(false);
 		weaponB.setVisible(false);
 		restartText.setVisible(false);
@@ -225,6 +248,9 @@ public class MainMenuSceneController implements Initializable {
 					restartGame();
 				}
 				else if (!gameRunning) {
+					if(totalCoinCount.get() > 500) {
+						boost.setVisible(true);
+					}
 						pauseMenuButton.setVisible(true);
 						settingImageView.setVisible(false);
 						gameRunning = true;
@@ -291,6 +317,7 @@ public class MainMenuSceneController implements Initializable {
 	}
 
 	private void gameOverScreen() {
+		boost.setVisible(false);
 		reviveMenu.setVisible(false);
 		reviveTimeBar.setScaleX(1);
 		restartText.setVisible(true);
